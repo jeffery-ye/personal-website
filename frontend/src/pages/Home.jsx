@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { ArrowRight, FileText } from 'lucide-react';
+import { ArrowRight, FileText, Github, Linkedin } from 'lucide-react';
 import headshot from '../assets/headshot.png';
 import { content } from '../data/content';
 import GradientText from '../components/GradientText';
@@ -8,10 +8,7 @@ const Home = () => {
   return (
     <div className="pt-10 pb-40 flex flex-col justify-center min-h-[calc(100vh-100px)]">
       
-      {/* SECTION 1: The Hook (Elevator Pitch + Headshot) */}
-      <div className="flex flex-col-reverse md:flex-row items-center gap-12 md:gap-20">
-        
-        {/* Left: The Pitch */}
+    <div className="flex flex-col-reverse md:flex-row items-center gap-12 md:gap-10">        
         <div className="flex-1 space-y-8 text-center md:text-left">
           <div className="space-y-4">
             
@@ -19,16 +16,16 @@ const Home = () => {
               colors={["#22D3EE", "#A855F7", "#EC4899"]}
               animationSpeed={3}
               showBorder={false}
-              className="text-4xl md:text-6xl font-bold leading-tight pb-2 md:mx-0 md:ml-3"
+              className="text-4xl md:text-6xl font-bold leading-tight pb-2 md:mx-0 md:ml-2"
             >
               Hi, I'm Jeffery
             </GradientText>
             
-            <h2 className="text-xl md:text-2xl text-nebula-cyan font-medium drop-shadow-lg md:ml-4">
+            <h2 className="text-xl md:text-2xl text-nebula-cyan font-medium drop-shadow-lg md:ml-3">
               {content.hero.subtitle}
             </h2>
 
-            <p className="text-lg md:text-xl text-star-400 leading-relaxed max-w-2xl mx-auto md:mx-0 drop-shadow-lg md:ml-4">
+            <p className="text-lg md:text-xl text-star-400 leading-relaxed max-w-2xl mx-auto md:mx-0 drop-shadow-lg md:ml-3">
               {content.about.intro}
             </p>
           </div>
@@ -44,20 +41,37 @@ const Home = () => {
 
             <Link 
               to="/resume"
-              className="inline-flex items-center gap-2 px-6 py-3 border border-space-800 text-star-100 font-medium rounded-full hover:border-nebula-purple hover:text-nebula-purple transition-colors duration-300 drop-shadow-lg"
+              className="inline-flex items-center gap-2 px-6 py-3 border-2 border-nebula-purple/50 text-star-100 font-medium rounded-full hover:bg-nebula-purple/10 hover:border-nebula-purple hover:text-white transition-all duration-300 drop-shadow-lg"
             >
               <FileText size={18} />
               Resume
             </Link>
+
+            <div className="flex items-center gap-4 ml-2">
+              <a 
+                href="https://linkedin.com/in/jefferyye" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-3 py-3 border-2 border-nebula-purple/50 text-star-100 font-medium rounded-full hover:bg-nebula-purple/10 hover:border-nebula-purple hover:text-white transition-all duration-300 drop-shadow-lg"
+              >
+                <Linkedin size={20} className="group-hover:scale-110 transition-transform" />
+              </a>
+
+              <a 
+                href="https://github.com/jeffery-ye"
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-3 py-3 border-2 border-nebula-purple/50 text-star-100 font-medium rounded-full hover:bg-nebula-purple/10 hover:border-nebula-purple hover:text-white transition-all duration-300 drop-shadow-lg"
+              >
+                <Github size={20} className="group-hover:scale-110 transition-transform" />
+              </a>
+            </div>
+
           </div>
         </div>
 
-        {/* Right: The Headshot */}
         <div className="relative group shrink-0">
-          {/* Glowing Ring Effect */}
-          <div className="absolute -inset-1 bg-gradient-to-r from-nebula-cyan to-nebula-purple rounded-full opacity-75 blur group-hover:opacity-100 transition duration-1000"></div>
-          
-          <div className="relative w-48 h-48 md:w-72 md:h-72 rounded-full overflow-hidden border-4 border-space-900 shadow-2xl">
+            <div className="relative w-64 h-64 md:w-96 md:h-96 rounded-full overflow-hidden border-4 border-space-800 shadow-2xl">
             <img 
               src={headshot} 
               alt="Jeffery Ye" 

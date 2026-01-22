@@ -14,9 +14,9 @@ export const content = {
     intro: "I'm a graduating senior at the University of Washington, specializing in Software and AI. Currently, I work as a Software Research Assistant at Seattle Children's, where I build autonomous AI agents to accelerate research workflows. I'm also a teaching assistant at the Information School, where I introduce students to concepts like Machine Learning, Large Language Models, and AI Ethics.",
     
     bio: [
-      "bio1",
-      "bio2",
-      "bio3"
+      "Hi, I'm Jeffery, a senior Informatics student at the University of Washington. I'm a software research assistant at Seattle Children's Research Institute, where I get to combine my passions for AI/NLP with fascinating (and terrifying) infectious diseases. I've created complex agentic workflows, worked on full-stack web applications, and written a research paper there. I'm also a teaching assistant for the Information School, where I help instruct students on the foundations of Informatics. We discuss concepts at the intersection between technology and society, and I've enjoyed teaching classes on topics like LLMs, algorithmic bias, cybersecurity, data science, etc.",
+      "Outside of work, I can often be found rock climbing (cliché, I know). I mostly focus on indoor bouldering, but have been known to climb outdoors. I'm also a big fan of sci-fi, no matter if its through books, movies, TV shows, or video games. I've always been fascinated by space, astronomy, speculative exobiology, and more—hence the star theming of this website.",
+      "Interested in working with me, chatting about my hobbies, or anything in between? Feel free to reach out through my LinkedIn or Email!"
     ]
   },
 
