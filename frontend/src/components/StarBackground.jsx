@@ -16,8 +16,8 @@ const StarBackground = () => {
     return shadowString;
   };
 
-  const smallStars = useMemo(() => generateStars(100), []);
-  const mediumStars = useMemo(() => generateStars(100), []);
+  const smallStars = useMemo(() => generateStars(0), []); // Placeholder, just in case we go in a different star direction in the future
+  const mediumStars = useMemo(() => generateStars(0), []);
 
   return (
     <div className="fixed inset-0 z-0 pointer-events-none overflow-hidden bg-space-950">

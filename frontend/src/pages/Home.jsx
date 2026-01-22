@@ -8,7 +8,7 @@ const Home = () => {
   return (
     <div className="pt-10 pb-40 flex flex-col justify-center min-h-[calc(100vh-100px)]">
       
-    <div className="flex flex-col-reverse md:flex-row items-center gap-12 md:gap-10">        
+      <div className="flex flex-col-reverse md:flex-row items-center gap-12 md:gap-10">        
         <div className="flex-1 space-y-8 text-center md:text-left">
           <div className="space-y-4">
             
@@ -16,16 +16,16 @@ const Home = () => {
               colors={["#22D3EE", "#A855F7", "#EC4899"]}
               animationSpeed={3}
               showBorder={false}
-              className="text-4xl md:text-6xl font-bold leading-tight pb-2 md:mx-0 md:ml-2"
+              className="font-display text-4xl md:text-6xl font-bold leading-tight pb-2 md:mx-0 md:ml-2"
             >
               Hi, I'm Jeffery
             </GradientText>
             
-            <h2 className="text-xl md:text-2xl text-nebula-cyan font-medium drop-shadow-lg md:ml-3">
+            <h2 className="font-display text-xl md:text-2xl text-nebula-cyan font-medium drop-shadow-lg md:ml-3">
               {content.hero.subtitle}
             </h2>
 
-            <p className="text-lg md:text-xl text-star-400 leading-relaxed max-w-2xl mx-auto md:mx-0 drop-shadow-lg md:ml-3">
+            <p className="font-sans text-lg md:text-xl text-star-400 leading-relaxed max-w-2xl mx-auto md:mx-0 drop-shadow-lg md:ml-3">
               {content.about.intro}
             </p>
           </div>
@@ -33,7 +33,7 @@ const Home = () => {
           <div className="flex flex-wrap items-center justify-center md:justify-start gap-4">
             <Link 
               to="/projects"
-              className="group inline-flex items-center gap-2 px-6 py-3 bg-nebula-cyan text-space-950 font-bold rounded-full hover:bg-white transition-all duration-300 transform hover:scale-105 shadow-[0_0_20px_rgba(34,211,238,0.3)]"
+              className="font-display group inline-flex items-center gap-2 px-6 py-3 bg-nebula-cyan text-space-950 font-bold rounded-full hover:bg-white transition-all duration-300 transform hover:scale-105 shadow-[0_0_20px_rgba(34,211,238,0.3)]"
             >
               View Projects
               <ArrowRight className="group-hover:translate-x-1 transition-transform" />
@@ -41,7 +41,7 @@ const Home = () => {
 
             <Link 
               to="/resume"
-              className="inline-flex items-center gap-2 px-6 py-3 border-2 border-nebula-purple/50 text-star-100 font-medium rounded-full hover:bg-nebula-purple/10 hover:border-nebula-purple hover:text-white transition-all duration-300 drop-shadow-lg"
+              className="font-display inline-flex items-center gap-2 px-6 py-3 border-2 border-nebula-purple/50 text-star-100 font-medium rounded-full hover:bg-nebula-purple/10 hover:border-nebula-purple hover:text-white transition-all duration-300 drop-shadow-lg"
             >
               <FileText size={18} />
               Resume

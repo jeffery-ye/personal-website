@@ -4,23 +4,19 @@ import GradientText from '../components/GradientText';
 
 const About = () => {
   return (
-    // CHANGED: 
-    // 1. Reverted 'pt-0' back to 'pt-10' (so the page isn't jammed at the very top).
-    // 2. Reduced 'space-y-16' to 'space-y-8' (This pulls "Let's Connect" much closer to the Bio).
     <div className="pt-10 pb-20 space-y-8 max-w-4xl mx-auto">
       
-      {/* Header */}
       <GradientText
         colors={["#26efff","#921aff","#fa2bff"]}
         animationSpeed={3}
         showBorder={false}
         yoyo={false}
-        className="text-4xl md:text-6xl font-bold leading-tight drop-shadow-lg" 
+        className="font-display text-4xl md:text-6xl font-bold leading-tight drop-shadow-lg" 
       >
         About Me
       </GradientText>
 
-      <div className="space-y-8 text-lg text-star-400 leading-loose">
+      <div className="space-y-8 text-lg text-star-400 leading-loose font-sans">
         {content.about.bio.map((paragraph, index) => (
           <p key={index} className="drop-shadow-lg">
             {paragraph}
@@ -28,9 +24,8 @@ const About = () => {
         ))}
       </div>
 
-      {/* The "Let's Connect" Section */}
       <div className="pt-8 border-t border-space-800">
-        <h2 className="text-3xl font-bold text-white mb-8 drop-shadow-lg">
+        <h2 className="font-display text-3xl font-bold text-white mb-8 drop-shadow-lg">
           Let's Connect
         </h2>
         
@@ -45,8 +40,8 @@ const About = () => {
                 <Mail size={24} />
               </div>
               <div>
-                <h3 className="text-xl font-bold text-white group-hover:text-nebula-cyan transition-colors drop-shadow-lg">Email Me</h3>
-                <p className="text-star-400 text-sm drop-shadow-lg">Get in touch directly</p>
+                <h3 className="font-display text-xl font-bold text-white group-hover:text-nebula-cyan transition-colors drop-shadow-lg">Email Me</h3>
+                <p className="font-sans text-star-400 text-sm drop-shadow-lg">Get in touch directly</p>
               </div>
             </div>
             <ArrowRight className="text-star-400 group-hover:text-nebula-cyan group-hover:translate-x-1 transition-transform" />
@@ -63,8 +58,8 @@ const About = () => {
                 <Linkedin size={24} />
               </div>
               <div>
-                <h3 className="text-xl font-bold text-white group-hover:text-nebula-purple transition-colors drop-shadow-lg">LinkedIn</h3>
-                <p className="text-star-400 text-sm drop-shadow-lg">Connect with me</p>
+                <h3 className="font-display text-xl font-bold text-white group-hover:text-nebula-purple transition-colors drop-shadow-lg">LinkedIn</h3>
+                <p className="font-sans text-star-400 text-sm drop-shadow-lg">Connect with me</p>
               </div>
             </div>
             <ArrowRight className="text-star-400 group-hover:text-nebula-purple group-hover:translate-x-1 transition-transform" />

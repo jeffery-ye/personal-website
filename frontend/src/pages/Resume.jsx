@@ -12,7 +12,7 @@ const Resume = () => {
                 animationSpeed={3}
                 showBorder={false}
                 yoyo={false}
-                className="text-4xl md:text-6xl font-bold"
+                className="font-display text-4xl md:text-6xl font-bold"
                 >
                 Resume
                 </GradientText>

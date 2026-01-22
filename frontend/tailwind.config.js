@@ -6,6 +6,10 @@ export default {
   ],
   theme: {
     extend: {
+        fontFamily: {
+        sans: ['Inter', 'sans-serif'],
+        display: ['Space Grotesk', 'sans-serif'],
+      },
       colors: { // thank you AI; my colorblind eyes could never
         space: {
           950: '#000000', // Deepest black-blue (Main background)
