@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X, Code2 } from 'lucide-react';
+import { Menu, X, Telescope } from 'lucide-react';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -20,10 +20,9 @@ const Navbar = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           
-          {/* Logo */}
           <Link to="/" className="flex items-center space-x-2 text-nebula-cyan hover:text-nebula-purple transition-colors">
-            <Code2 size={28} />
-            <span className="font-bold text-xl tracking-tight text-star-100">Portfolio</span>
+            <Telescope size={28} />
+            <span className="font-bold text-xl tracking-tight text-star-100">Jeffery Ye</span>
           </Link>
 
           {/* Desktop Menu */}
