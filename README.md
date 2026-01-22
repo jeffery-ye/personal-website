@@ -1,8 +1,8 @@
 # Jeffery Ye - Personal Portfolio
 
-A personal portfolio website built to showcase Software and AI Engineering projects. This site features a cool space theme, interactive animations, and a centralized content management system.
+Welcome! This is a personal portfolio website built to showcase Software and AI Engineering projects. This site features a cool space theme, interactive animations, and a centralized content management system.
 
-## 🚀 Built With
+## Built With
 
 * **Framework:** [React](https://react.dev/) + [Vite](https://vitejs.dev/)
 * **Styling:** [Tailwind CSS](https://tailwindcss.com/)
@@ -10,14 +10,14 @@ A personal portfolio website built to showcase Software and AI Engineering proje
 * **Icons:** [Lucide React](https://lucide.dev/)
 * **Fonts:** Space Grotesk (Headers) & Inter (Body)
 
-## ✨ Features
+## Features
 
 * **MY Custom Space Theme:** A unique dark mode aesthetic :D
 * **Responsive Design:** Fully optimized for desktop, tablet, and mobile devices.
 * **Interactive Components:** Includes a starry background, gradient text effects, and hover animations.
 * **PDF Integration:** Embedded resume viewer with download and print capabilities.
 
-## 🛠️ Getting Started
+## Getting Started
 
 If you would like to take this project for whatever uses you can come up with, follow the steps below!
 
@@ -47,7 +47,7 @@ If you would like to take this project for whatever uses you can come up with, f
 4.  **Open in Browser**
     Visit `http://localhost:5173` to view the site.
 
-## 📂 Project Structure
+## Project Structure
 
 ```text
 src/
