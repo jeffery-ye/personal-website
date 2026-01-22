@@ -1,13 +1,22 @@
 import { Download, FileText } from 'lucide-react';
 import resumePdf from '../assets/Resume_JefferyYe.pdf';
+import GradientText from '../components/GradientText'
 
 const Resume = () => {
   return (
-    <div className="pt-10 pb-10 h-[calc(100vh-64px)] flex flex-col items-center">
-      <div className="text-center space-y-6 mb-8 px-4">
-        <h1 className="text-4xl md:text-5xl font-bold text-nebula-cyan drop-shadow-lg">
-          Resume
-        </h1>
+    <div className="pt-2 pb-10 h-[calc(100vh-64px)] flex flex-col items-center">
+      <div className="text-center space-y-6 mb-8 px-">
+        <div className="text-white pt-10">
+              <GradientText
+                colors={["#26efff","#921aff","#fa2bff"]}
+                animationSpeed={3}
+                showBorder={false}
+                yoyo={false}
+                className="text-4xl md:text-6xl font-bold"
+                >
+                Resume
+                </GradientText>
+            </div>
         
         <div className="flex flex-wrap justify-center gap-4">
           <a 

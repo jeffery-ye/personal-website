@@ -1,8 +1,17 @@
+import GradientText from '../components/GradientText'
+
 const Home = () => {
   return (
     <div className="text-white pt-10">
-      <h1 className="text-3xl font-bold">Home Page</h1>
-      <p>WIP</p>
+        <GradientText
+            colors={["#26efff","#921aff","#fa2bff"]}
+            animationSpeed={3}
+            showBorder={false}
+            yoyo={false}
+            className="text-4xl md:text-6xl font-bold"
+            >
+            Home
+            </GradientText>
     </div>
   );
 };

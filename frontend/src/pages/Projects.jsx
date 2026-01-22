@@ -1,17 +1,23 @@
 import ProjectCard from '../components/ProjectCard';
 import { projects } from '../data/content';
+import GradientText from '../components/GradientText'
 
 const Projects = () => {
   return (
-    <div className="space-y-12 pt-8">
+    <div className="space-y-12">
       
       <div className="text-center space-y-4">
-        <h1 className="text-4xl md:text-5xl font-bold text-nebula-cyan drop-shadow-lg">
-          My Work
-        </h1>
-        <p className="text-4xl md:text-2xl text-star-500 drop-shadow-lg">
-          A collection of agents, interfaces, and data pipelines I've built.
-        </p>
+        <div className="text-white pt-10">
+              <GradientText
+                colors={["#26efff","#921aff","#fa2bff"]}
+                animationSpeed={3}
+                showBorder={false}
+                yoyo={false}
+                className="text-4xl md:text-6xl font-bold py-2"
+                >
+                My Work
+                </GradientText>
+            </div>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
