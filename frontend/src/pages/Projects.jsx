@@ -6,10 +6,10 @@ const Projects = () => {
     <div className="space-y-12 pt-8">
       
       <div className="text-center space-y-4">
-        <h1 className="text-4xl md:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-nebula-cyan to-nebula-purple">
+        <h1 className="text-4xl md:text-5xl font-bold text-nebula-cyan drop-shadow-lg">
           My Work
         </h1>
-        <p className="text-star-400 max-w-2xl mx-auto">
+        <p className="text-4xl md:text-2xl text-star-500 drop-shadow-lg">
           A collection of agents, interfaces, and data pipelines I've built.
         </p>
       </div>

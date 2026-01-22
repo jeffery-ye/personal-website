@@ -15,7 +15,7 @@ export default {
 
         star: {
           100: '#F1F5F9', // Primary Text (Bright white-blue)
-          400: '#b1c3dd', // Secondary Text (Muted gray-blue)
+          400: '#94A3B8', // Secondary Text (Muted gray-blue)
         },
 
         nebula: {
