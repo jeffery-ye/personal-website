@@ -1,105 +1,109 @@
-import { motion } from 'framer-motion';
-import { useStoreActions } from '../../store/useStore';
+import { motion, AnimatePresence } from 'framer-motion';
+import { useStore, useStoreActions } from '../../store/useStore';
 import { content } from '../../data/content';
-import { polarToCartesian, getProjectPosition } from '../../utils/math';
 import GalaxyNode from './GalaxyNode';
-import OrbitRings from './OrbitRings';
+import ConstellationLines from './ConstellationLines';
 import ActiveProjectOverlay from './ActiveProjectOverlay';
+import ClusterNavigation from './ClusterNavigation';
 
 const GalaxyCanvas = () => {
-    const { setActiveProject } = useStoreActions();
+    const orbitSystem = useStore((state) => state.orbitSystem);
+    const { setActiveProject, setOrbitSystem } = useStoreActions();
 
-    // Calculate drag constraints (slightly larger than outermost orbit)
-    const maxDrag = 700;
+    // Get current system data
+    const currentSystem = content.systems[orbitSystem];
 
-    // Calculate positions for all nodes
-    const heroPos = polarToCartesian(content.hero.coords.r, content.hero.coords.theta);
-    const aboutPos = polarToCartesian(content.about.coords.r, content.about.coords.theta);
-    const projectsClusterPos = polarToCartesian(content.projects.coords.r, content.projects.coords.theta);
-    const resumePos = polarToCartesian(content.resume.coords.r, content.resume.coords.theta);
+    // Determine animation direction logic
+    // If we are in 'projects', we arrived via Zoom In. If 'home', we arrived via Zoom Out.
+    // This is a simplification; a persistent `prevSystem` would be more robust but this works for 2 systems.
+    const isZoomedIn = orbitSystem === 'projects';
 
-    // Calculate individual project positions (relative to projects cluster)
-    const projectPositions = content.projects.data.map((project) => ({
-        ...project,
-        position: getProjectPosition(content.projects.coords, project.coords),
-    }));
+    const variants = {
+        initial: (isZoomedIn) => ({
+            scale: isZoomedIn ? 0.2 : 5,
+            opacity: 0,
+            filter: 'blur(10px)',
+        }),
+        animate: {
+            scale: 1,
+            opacity: 1,
+            filter: 'blur(0px)',
+            transition: { duration: 1.2, ease: [0.16, 1, 0.3, 1] } // Custom spring-like ease
+        },
+        exit: (isZoomedIn) => ({
+            scale: isZoomedIn ? 5 : 0.2,
+            opacity: 0,
+            filter: 'blur(10px)',
+            transition: { duration: 0.8, ease: "easeInOut" }
+        })
+    };
+
+    // Calculate drag constraints
+    const maxDrag = 1000;
+
+    // Portal position for transform origin (Home system)
+    const portalNode = content['projects-portal'];
+    const transformOrigin = portalNode
+        ? `calc(50% + ${portalNode.x}px) calc(50% + ${portalNode.y}px)`
+        : 'center center';
 
     return (
         <div className="fixed inset-0 top-16 overflow-hidden bg-space-950">
+            {/* Navigation UI */}
+            <ClusterNavigation />
+
             {/* Draggable Canvas */}
             <motion.div
-                drag
-                dragConstraints={{
-                    left: -maxDrag,
-                    right: maxDrag,
-                    top: -maxDrag,
-                    bottom: maxDrag,
-                }}
-                dragElastic={0.1}
-                dragTransition={{ bounceStiffness: 300, bounceDamping: 20 }}
                 className="absolute inset-0 cursor-grab active:cursor-grabbing"
+                drag
+                dragConstraints={{ left: -maxDrag, right: maxDrag, top: -maxDrag, bottom: maxDrag }}
+                dragElastic={0.1}
                 style={{ width: '200%', height: '200%', left: '-50%', top: '-50%' }}
             >
-                {/* Orbit Rings */}
-                <OrbitRings radii={[150, 400]} />
+                <AnimatePresence mode="popLayout" custom={isZoomedIn}>
+                    <motion.div
+                        key={orbitSystem}
+                        custom={isZoomedIn}
+                        variants={variants}
+                        initial="initial"
+                        animate="animate"
+                        exit="exit"
+                        className="absolute inset-0 w-full h-full"
+                        style={{ transformOrigin }} // Dynamic origin based on portal location
+                    >
+                        {/* Constellation Lines */}
+                        <ConstellationLines
+                            content={content}
+                            connections={currentSystem.connections}
+                        />
 
-                {/* Center Node (Hero/Home) */}
-                <GalaxyNode
-                    id="node-hero"
-                    label="Home"
-                    x={heroPos.x}
-                    y={heroPos.y}
-                    color="bg-nebula-cyan"
-                    size="w-6 h-6"
-                    onClick={() => console.log('Navigate to Home')}
-                />
+                        {/* Render Nodes */}
+                        {currentSystem.nodes.map((node) => {
+                            const nodeData = content[node.id];
+                            if (!nodeData) return null;
 
-                {/* About Node */}
-                <GalaxyNode
-                    id="node-about"
-                    label="About Me"
-                    x={aboutPos.x}
-                    y={aboutPos.y}
-                    color="bg-nebula-purple"
-                    size="w-5 h-5"
-                    onClick={() => console.log('Navigate to About')}
-                />
-
-                {/* Projects Cluster Label */}
-                <GalaxyNode
-                    id="node-projects-cluster"
-                    label="Projects"
-                    x={projectsClusterPos.x}
-                    y={projectsClusterPos.y}
-                    color="bg-yellow-400"
-                    size="w-5 h-5"
-                    onClick={() => console.log('Navigate to Projects')}
-                />
-
-                {/* Individual Project Nodes */}
-                {projectPositions.map((project) => (
-                    <GalaxyNode
-                        key={project.id}
-                        id={`project-${project.id}`}
-                        label={project.title}
-                        x={project.position.x}
-                        y={project.position.y}
-                        color="bg-white"
-                        size="w-3 h-3"
-                        onClick={() => setActiveProject(project.id)}
-                    />
-                ))}
-
-                {/* Resume Node */}
-                <GalaxyNode
-                    id="node-resume"
-                    label="Resume"
-                    x={resumePos.x}
-                    y={resumePos.y}
-                    color="bg-green-400"
-                    size="w-5 h-5"
-                    onClick={() => console.log('Navigate to Resume')}
-                />
+                            return (
+                                <GalaxyNode
+                                    key={node.id}
+                                    id={node.id}
+                                    label={nodeData.title || nodeData.label || nodeData.data?.title}
+                                    x={nodeData.x}
+                                    y={nodeData.y}
+                                    type={node.type}
+                                    color={node.id === 'home' ? 'bg-nebula-cyan' : node.id === 'about' ? 'bg-nebula-purple' : 'bg-white'}
+                                    // Portal Handling
+                                    onClick={() => {
+                                        if (node.type === 'portal') {
+                                            setOrbitSystem(node.target);
+                                        } else if (node.type === 'project') {
+                                            setActiveProject(node.data.id);
+                                        }
+                                    }}
+                                />
+                            );
+                        })}
+                    </motion.div>
+                </AnimatePresence>
             </motion.div>
 
             {/* Overlay for expanded project */}

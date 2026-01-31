@@ -52,17 +52,51 @@ const projectsData = [
 ];
 
 export const content = {
+  // CONFIGURATION
+  // Define systems for navigation
+  systems: {
+    home: {
+      id: 'home',
+      connections: [
+        ['hero', 'about'],
+        ['about', 'resume'],
+        ['hero', 'projects-portal'],
+      ],
+      nodes: [
+        { id: 'hero', type: 'node' },
+        { id: 'about', type: 'node' },
+        { id: 'resume', type: 'node' },
+        { id: 'projects-portal', type: 'portal', target: 'projects' },
+      ]
+    },
+    projects: {
+      id: 'projects',
+      connections: [
+        ['project-1', 'project-2'],
+        ['project-2', 'project-3'],
+        ['project-3', 'project-4'],
+        ['project-4', 'project-5'],
+        ['project-5', 'project-6'],
+        ['project-1', 'project-4'],
+      ],
+      nodes: projectsData.map(p => ({ id: `project-${p.id}`, type: 'project', data: p }))
+    }
+  },
+
   // HOME PAGE CONTENT
   hero: {
+    id: 'hero',
     title: "Hi, I'm Jeffery",
     subtitle: "Software and AI Engineer",
     tagline: "tagline",
     cta: "View Projects",
-    coords: { r: 0, theta: 0 },
+    x: 0,
+    y: 0,
   },
 
   // ABOUT PAGE CONTENT
   about: {
+    id: 'about',
     intro: "I'm a graduating senior at the University of Washington, specializing in Software and AI. Currently, I work as a Software Research Assistant at Seattle Children's, where I build autonomous AI agents to accelerate research workflows. I'm also a teaching assistant at the Information School, where I introduce students to concepts like Machine Learning, Large Language Models, and AI Ethics.",
 
     bio: [
@@ -70,22 +104,43 @@ export const content = {
       "Outside of work, I can often be found rock climbing (cliché, I know). I mostly focus on indoor bouldering, but have been known to climb outdoors. I'm also a big fan of sci-fi, no matter if its through books, movies, TV shows, or video games. I've always been fascinated by space, astronomy, speculative exobiology, and more—hence the star theming of this website.",
       "Interested in working with me, chatting about my hobbies, or anything in between? Feel free to reach out through my LinkedIn or Email!"
     ],
-    coords: { r: 400, theta: 2.5 },
+    x: -250,
+    y: -150,
   },
 
-  projects: {
-    coords: { r: 400, theta: 1 },
-    data: projectsData.map((project, index) => ({
-      ...project,
-      coords: {
-        r: 150,
-        theta: (index / projectsData.length) * 2 * Math.PI
-      }
-    }))
+  // PROJECTS PORTAL (Replaces the cluster)
+  'projects-portal': {
+    id: 'projects-portal',
+    label: "Projects Cluster",
+    x: 300,
+    y: 100,
   },
+
+  // INDIVIDUAL PROJECTS (For reference by ID)
+  ...projectsData.reduce((acc, project, index) => {
+    // New coordinate system for deep space view
+    const offsets = [
+      { x: 0, y: -200 },     // 1 (Top)
+      { x: 200, y: -100 },   // 2 (Top Right)
+      { x: 200, y: 100 },    // 3 (Bottom Right)
+      { x: 0, y: 200 },      // 4 (Bottom)
+      { x: -200, y: 100 },   // 5 (Bottom Left)
+      { x: -200, y: -100 }   // 6 (Top Left)
+    ];
+    const offset = offsets[index] || { x: 0, y: 0 };
+
+    acc[`project-${project.id}`] = {
+      ...project,
+      x: offset.x,
+      y: offset.y
+    };
+    return acc;
+  }, {}),
 
   resume: {
+    id: 'resume',
     title: "Resume",
-    coords: { r: 400, theta: Math.PI }, // 180° in radians
+    x: -150,
+    y: 250,
   }
 };

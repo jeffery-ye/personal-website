@@ -7,10 +7,13 @@ export const useStore = create((set) => ({
     camera: { x: 0, y: 0, zoom: 1 }, // intended for future use
 
     activeProjectId: null, // string | null — the ID of the currently expanded project
+    orbitSystem: 'home', // 'home' | 'projects'
 
     actions: {
         setActiveProject: (id) => set({ activeProjectId: id }),
         clearActiveProject: () => set({ activeProjectId: null }),
+
+        setOrbitSystem: (system) => set({ orbitSystem: system }),
 
         toggleViewMode: () => set((state) => {
             if (state.isMobile || state.prefersReducedMotion) {
