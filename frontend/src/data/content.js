@@ -53,6 +53,9 @@ const projectsData = [
 
 export const content = {
   // CONFIGURATION
+  // Project Data for List View
+  projects: { data: projectsData },
+
   // Define systems for navigation
   systems: {
     home: {

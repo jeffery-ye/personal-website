@@ -1,5 +1,5 @@
 import { useMemo } from 'react';
-import spaceBg from '../assets/space-bg.jpg';
+import spaceBg from '../assets/space-bg.webp';
 
 const StarBackground = ({ className = "fixed" }) => {
   const generateStars = (count) => {

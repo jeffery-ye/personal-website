@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useStore, useStoreActions } from '../../store/useStore';
 
@@ -8,12 +9,19 @@ import SectionOverlay from './SectionOverlay';
 import ActiveProjectOverlay from './ActiveProjectOverlay';
 import GalaxyBackground from './GalaxyBackground';
 import { content } from '../../data/content';
+import nebulaBg from '../../assets/nebula-bg.webp';
 
 const GalaxyCanvas = () => {
     const orbitSystem = useStore((state) => state.orbitSystem);
     const activeProjectId = useStore((state) => state.activeProjectId);
     const activeSection = useStore((state) => state.activeSection);
     const { setActiveProject, setOrbitSystem, setActiveSection } = useStoreActions();
+
+    // Preload Nebula Image
+    useEffect(() => {
+        const img = new Image();
+        img.src = nebulaBg;
+    }, []);
 
     // Get current system data
     const currentSystem = content.systems[orbitSystem];
@@ -82,6 +90,19 @@ const GalaxyCanvas = () => {
                             content={content}
                             connections={currentSystem.connections}
                         />
+
+                        {/* Nebula Background - Attached to System Space */}
+                        {orbitSystem === 'projects' && (
+                            <div
+                                className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[150%] h-[150%] -z-10 opacity-80 pointer-events-none"
+                                style={{
+                                    backgroundImage: `url(${nebulaBg})`,
+                                    backgroundSize: 'contain',
+                                    backgroundPosition: 'center',
+                                    backgroundRepeat: 'no-repeat'
+                                }}
+                            />
+                        )}
 
                         {/* Render Nodes */}
                         {currentSystem.nodes.map((node) => {
