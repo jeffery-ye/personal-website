@@ -1,5 +1,6 @@
 import { useStore } from '../store/useStore';
 import Navbar from './Navbar';
+import GalaxyCanvas from './galaxy/GalaxyCanvas';
 
 const ViewManager = ({ children }) => {
     const { viewMode, isMobile } = useStore();
@@ -8,9 +9,7 @@ const ViewManager = ({ children }) => {
         <>
             <Navbar />
             {viewMode === 'galaxy' && !isMobile ? (
-                <div className="galaxy-container flex items-center justify-center h-[calc(100vh-64px)] text-2xl text-nebula-cyan font-bold relative z-10 drop-shadow-lg">
-                    Galaxy View Coming Soon
-                </div>
+                <GalaxyCanvas />
             ) : (
                 children
             )}

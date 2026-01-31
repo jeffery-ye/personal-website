@@ -82,5 +82,10 @@ export const content = {
         theta: (index / projectsData.length) * 2 * Math.PI
       }
     }))
+  },
+
+  resume: {
+    title: "Resume",
+    coords: { r: 400, theta: Math.PI }, // 180° in radians
   }
 };
