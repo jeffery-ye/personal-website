@@ -22,18 +22,15 @@ const GalaxyCanvas = () => {
         initial: (isZoomedIn) => ({
             scale: isZoomedIn ? 0.2 : 5,
             opacity: 0,
-            filter: 'blur(10px)',
         }),
         animate: {
             scale: 1,
             opacity: 1,
-            filter: 'blur(0px)',
             transition: { type: "spring", duration: 1.2, bounce: 0, delay: 0.1 } // Critically damped spring, slight delay to prevent initial stutter
         },
         exit: (isZoomedIn) => ({
             scale: isZoomedIn ? 5 : 0.2,
             opacity: 0,
-            filter: 'blur(10px)',
             transition: { duration: 0.8, ease: "easeInOut" }
         })
     };

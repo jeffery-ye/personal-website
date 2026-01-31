@@ -17,14 +17,12 @@ const ConstellationLines = ({ content, connections }) => {
                     if (!start || !end) return null;
 
                     return (
-                        <motion.line
+                        <motion.path
                             key={`${startId}-${endId}`}
-                            x1={start.x}
-                            y1={start.y}
-                            x2={end.x}
-                            y2={end.y}
-                            stroke="rgba(255, 255, 255, 0.15)"
+                            d={`M ${start.x} ${start.y} L ${end.x} ${end.y}`}
+                            stroke="rgba(255, 255, 255, 0.45)"
                             strokeWidth="1"
+                            fill="none"
                             initial={{ pathLength: 0, opacity: 0 }}
                             animate={{ pathLength: 1, opacity: 1 }}
                             transition={{ duration: 1.5, delay: index * 0.1, ease: "easeInOut" }}

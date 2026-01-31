@@ -10,8 +10,9 @@ const ActiveProjectOverlay = () => {
     const { clearActiveProject } = useStoreActions();
 
     // Find the active project data
+    // In the new content structure, projects are top-level keys like 'project-1'
     const activeProject = activeProjectId
-        ? content.projects.data.find((p) => p.id === activeProjectId)
+        ? content[`project-${activeProjectId}`]
         : null;
 
     // Close on Escape key

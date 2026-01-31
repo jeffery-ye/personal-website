@@ -122,12 +122,12 @@ export const content = {
   ...projectsData.reduce((acc, project, index) => {
     // New coordinate system for deep space view
     const offsets = [
-      { x: 0, y: -200 },     // 1 (Top)
-      { x: 200, y: -100 },   // 2 (Top Right)
-      { x: 200, y: 100 },    // 3 (Bottom Right)
-      { x: 0, y: 200 },      // 4 (Bottom)
-      { x: -200, y: 100 },   // 5 (Bottom Left)
-      { x: -200, y: -100 }   // 6 (Top Left)
+      { x: 220, y: -120 },     // ai protein purification agent
+      { x: 200, y: 40 },   // ai drug target selection
+      { x: -20, y: 50 },    // musicalendar
+      { x: -50, y: -100 },      // ai expense categorizer
+      { x: -250, y: -140 },   // portfolio website
+      { x: -450, y: 0 }   // crumbdrop
     ];
     const offset = offsets[index] || { x: 0, y: 0 };
 

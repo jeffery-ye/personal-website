@@ -1,8 +1,8 @@
 import { motion } from 'framer-motion';
-import { useState } from 'react';
+
 
 const GalaxyNode = ({ id, label, x, y, type = 'node', color = 'bg-white', size = 'w-4 h-4', onClick }) => {
-    const [isHovered, setIsHovered] = useState(false);
+
 
     // Portal Styling (e.g. Projects Cluster)
     const isPortal = type === 'portal';
@@ -23,8 +23,6 @@ const GalaxyNode = ({ id, label, x, y, type = 'node', color = 'bg-white', size =
                 className={`cursor-pointer rounded-full flex items-center justify-center ${finalColor} ${finalSize} ${!isPortal && 'shadow-lg shadow-white/30'}`}
                 whileHover={{ scale: 1.5 }}
                 whileTap={{ scale: 0.9 }}
-                onHoverStart={() => setIsHovered(true)}
-                onHoverEnd={() => setIsHovered(false)}
                 onClick={onClick}
                 transition={{ type: "spring", stiffness: 400, damping: 25 }}
             >
@@ -36,18 +34,12 @@ const GalaxyNode = ({ id, label, x, y, type = 'node', color = 'bg-white', size =
                         transition={{ duration: 3, repeat: Infinity }}
                     />
                 )}
-                {/* Label on hover */}
-                {isHovered && (
-                    <motion.div
-                        initial={{ opacity: 0, y: 10 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0 }}
-                        className="absolute top-full left-1/2 -translate-x-1/2 mt-2 px-2 py-1 bg-space-900/90 backdrop-blur-sm rounded text-xs text-star-100 whitespace-nowrap drop-shadow-lg"
-                    >
-                        {label}
-                    </motion.div>
-                )}
             </motion.div>
+
+            {/* Label - Always visible beneath star */}
+            <div className="absolute top-full left-1/2 -translate-x-1/2 mt-3 px-2 py-1 bg-space-900/60 backdrop-blur-sm rounded text-xs text-star-100 whitespace-nowrap drop-shadow-lg pointer-events-none">
+                {label}
+            </div>
         </div>
     );
 };
