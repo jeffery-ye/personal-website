@@ -28,7 +28,7 @@ const GalaxyCanvas = () => {
             scale: 1,
             opacity: 1,
             filter: 'blur(0px)',
-            transition: { duration: 1.2, ease: [0.16, 1, 0.3, 1] } // Custom spring-like ease
+            transition: { type: "spring", duration: 1.2, bounce: 0, delay: 0.1 } // Critically damped spring, slight delay to prevent initial stutter
         },
         exit: (isZoomedIn) => ({
             scale: isZoomedIn ? 5 : 0.2,
@@ -48,19 +48,21 @@ const GalaxyCanvas = () => {
         : 'center center';
 
     return (
-        <div className="fixed inset-0 top-16 overflow-hidden bg-space-950">
+        <div className="fixed inset-0 top-16 overflow-hidden bg-space-950" >
             {/* Navigation UI */}
-            <ClusterNavigation />
+            < ClusterNavigation />
 
             {/* Draggable Canvas */}
-            <motion.div
+            < motion.div
                 className="absolute inset-0 cursor-grab active:cursor-grabbing"
                 drag
-                dragConstraints={{ left: -maxDrag, right: maxDrag, top: -maxDrag, bottom: maxDrag }}
+                dragConstraints={{
+                    left: - maxDrag, right: maxDrag, top: -maxDrag, bottom: maxDrag
+                }}
                 dragElastic={0.1}
                 style={{ width: '200%', height: '200%', left: '-50%', top: '-50%' }}
             >
-                <AnimatePresence mode="popLayout" custom={isZoomedIn}>
+                <AnimatePresence mode="wait" custom={isZoomedIn}>
                     <motion.div
                         key={orbitSystem}
                         custom={isZoomedIn}
@@ -86,7 +88,7 @@ const GalaxyCanvas = () => {
                                 <GalaxyNode
                                     key={node.id}
                                     id={node.id}
-                                    label={nodeData.title || nodeData.label || nodeData.data?.title}
+                                    label={nodeData.label || nodeData.title || nodeData.data?.title}
                                     x={nodeData.x}
                                     y={nodeData.y}
                                     type={node.type}
@@ -104,11 +106,11 @@ const GalaxyCanvas = () => {
                         })}
                     </motion.div>
                 </AnimatePresence>
-            </motion.div>
+            </motion.div >
 
             {/* Overlay for expanded project */}
-            <ActiveProjectOverlay />
-        </div>
+            < ActiveProjectOverlay />
+        </div >
     );
 };
 

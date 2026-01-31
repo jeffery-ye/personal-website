@@ -86,6 +86,7 @@ export const content = {
   // HOME PAGE CONTENT
   hero: {
     id: 'hero',
+    label: "Home",
     title: "Hi, I'm Jeffery",
     subtitle: "Software and AI Engineer",
     tagline: "tagline",
@@ -97,6 +98,7 @@ export const content = {
   // ABOUT PAGE CONTENT
   about: {
     id: 'about',
+    label: "About Me",
     intro: "I'm a graduating senior at the University of Washington, specializing in Software and AI. Currently, I work as a Software Research Assistant at Seattle Children's, where I build autonomous AI agents to accelerate research workflows. I'm also a teaching assistant at the Information School, where I introduce students to concepts like Machine Learning, Large Language Models, and AI Ethics.",
 
     bio: [
