@@ -1,7 +1,7 @@
 import blackholeImg from '../../assets/blackhole.webp';
 
 const StarIcon = ({
-    variant = 'default', // 'default' | 'portal' | 'project'
+    variant = 'default', // 'default' | 'portal' | 'project' | 'blackhole'
     size = 48,
     color = '#22D3EE', // nebula-cyan
     secondaryColor = '#A855F7' // nebula-purple

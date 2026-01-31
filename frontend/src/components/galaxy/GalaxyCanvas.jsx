@@ -81,7 +81,7 @@ const GalaxyCanvas = () => {
         <div className="fixed inset-0 top-16 overflow-hidden" >
             <GalaxyBackground />
             {/* Navigation UI */}
-            < ClusterNavigation />
+            <ClusterNavigation />
             <SectionOverlay />
 
             {/* Draggable Canvas - Disable interaction when overlay is open */}
@@ -151,11 +151,11 @@ const GalaxyCanvas = () => {
                         })}
                     </motion.div>
                 </AnimatePresence>
-            </motion.div >
+            </motion.div>
 
             {/* Overlay for expanded project */}
-            < ActiveProjectOverlay />
-        </div >
+            <ActiveProjectOverlay />
+        </div>
     );
 };
 
