@@ -7,6 +7,7 @@ Welcome! This is a personal portfolio website built to showcase Software and AI 
 ## Built With
 
 * **Framework:** [React](https://react.dev/) + [Vite](https://vitejs.dev/)
+* **State Management:** [Zustand](https://github.com/pmndrs/zustand)
 * **Styling:** [Tailwind CSS](https://tailwindcss.com/)
 * **Animations:** [Framer Motion](https://www.framer.com/motion/)
 * **Icons:** [Lucide React](https://lucide.dev/)
@@ -14,9 +15,11 @@ Welcome! This is a personal portfolio website built to showcase Software and AI 
 
 ## Features
 
-* **MY Custom Space Theme:** A unique dark mode aesthetic :D
-* **Responsive Design:** Fully optimized for desktop, tablet, and mobile devices.
-* **Interactive Components:** Includes a starry background, gradient text effects, and hover animations.
+* **Constellation View:** An interactive galaxy-style navigation mode with animated star nodes, warp transitions between systems, and nebula backgrounds. Toggle between Galaxy and Normal views.
+* **Custom Space Theme:** A unique dark mode aesthetic with starfield backgrounds and glassmorphism effects.
+* **Responsive Design:** Fully optimized for desktop, tablet, and mobile. Mobile devices automatically use the accessible List View.
+* **Accessibility:** Respects `prefers-reduced-motion`, with graceful fallbacks.
+* **Interactive Components:** Includes draggable canvas, animated constellation lines, gradient text effects, and hover animations.
 * **PDF Integration:** Embedded resume viewer with download and print capabilities.
 
 ## Getting Started
@@ -53,9 +56,12 @@ If you would like to take this project for whatever uses you can come up with, f
 
 ```text
 src/
-├── assets/          # Images (headshot.png) and Resume PDF
-├── components/      # Reusable UI components (Navbar, ProjectCard, GradientText)
+├── assets/          # Images and Resume PDF
+├── components/      # Reusable UI components
+│   └── galaxy/      # Galaxy View components (GalaxyCanvas, GalaxyNode, etc.)
 ├── data/            # Central content file (content.js)
+├── hooks/           # Custom hooks (useHardwareCheck)
 ├── pages/           # Page layouts (Home, About, Projects, Resume)
+├── store/           # Zustand state store (useStore.js)
 ├── App.jsx          # Main application wrapper
 └── index.css        # Tailwind imports and global styles
