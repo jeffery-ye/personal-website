@@ -1,3 +1,5 @@
+import blackholeImg from '../../assets/blackhole.webp';
+
 const StarIcon = ({
     variant = 'default', // 'default' | 'portal' | 'project'
     size = 48,
@@ -47,8 +49,8 @@ const StarIcon = ({
                     </filter>
                     <radialGradient id="project-radial" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
                         <stop offset="20%" stopColor="white" />
-                        <stop offset="60%" stopColor={secondaryColor} />
-                        <stop offset="100%" stopColor="#7C3AED" />
+                        <stop offset="60%" stopColor="#2be6ffff" />
+                        <stop offset="100%" stopColor="#2be6ffff" />
                     </radialGradient>
                 </defs>
                 <path
@@ -115,6 +117,20 @@ const StarIcon = ({
                     />
                 </g>
             </svg>
+        );
+    }
+
+    // Black Hole variant (Image)
+    if (variant === 'blackhole') {
+        return (
+            <img
+                src={blackholeImg}
+                alt="Black Hole"
+                width={size}
+                height={size}
+                className="select-none pointer-events-none"
+                style={{ filter: 'drop-shadow(0 0 20px rgba(245, 158, 11, 0.4))' }} // Subtle glow to blend
+            />
         );
     }
 

@@ -10,9 +10,7 @@ import ActiveProjectOverlay from './ActiveProjectOverlay';
 import GalaxyBackground from './GalaxyBackground';
 import { content } from '../../data/content';
 import nebulaBg from '../../assets/image_assets/nebula-bg.webp';
-import star1 from '../../assets/icon_assets/star1.webp';
-import star2 from '../../assets/icon_assets/star2.webp';
-import starCluster from '../../assets/icon_assets/starcluster.webp';
+import blackholeImg from '../../assets/blackhole.webp';
 
 const GalaxyCanvas = () => {
     const orbitSystem = useStore((state) => state.orbitSystem);
@@ -22,7 +20,7 @@ const GalaxyCanvas = () => {
 
     // Preload Nebula Image
     useEffect(() => {
-        const imagesToPreload = [nebulaBg, star1, star2, starCluster];
+        const imagesToPreload = [nebulaBg, blackholeImg];
         imagesToPreload.forEach(async (src) => {
             const img = new Image();
             img.src = src;
@@ -38,25 +36,36 @@ const GalaxyCanvas = () => {
     const currentSystem = content.systems[orbitSystem];
 
     // Determine animation direction logic
-    // If we are in 'projects', we arrived via Zoom In. If 'home', we arrived via Zoom Out.
-    // This is a simplification; a persistent `prevSystem` would be more robust but this works for 2 systems.
-    const isZoomedIn = orbitSystem === 'projects';
+    // We now use specific variants for 'home' vs 'projects' to avoid state staleness issues during exit transitions.
+
 
     const variants = {
-        initial: (isZoomedIn) => ({
-            scale: isZoomedIn ? 0.2 : 5,
-            opacity: 0,
-        }),
-        animate: {
-            scale: 1,
-            opacity: 1,
-            transition: { type: "spring", duration: 1.2, bounce: 0, delay: 0.1 } // Critically damped spring, slight delay to prevent initial stutter
+        home: {
+            initial: { scale: 5, opacity: 0 },
+            animate: {
+                scale: 1,
+                opacity: 1,
+                transition: { type: "spring", duration: 1.2, bounce: 0, delay: 0.1 }
+            },
+            exit: {
+                scale: 5,
+                opacity: 0,
+                transition: { duration: 0.8, ease: "easeInOut" }
+            }
         },
-        exit: (isZoomedIn) => ({
-            scale: isZoomedIn ? 5 : 0.2,
-            opacity: 0,
-            transition: { duration: 0.8, ease: "easeInOut" }
-        })
+        projects: {
+            initial: { scale: 0.2, opacity: 0 },
+            animate: {
+                scale: 1,
+                opacity: 1,
+                transition: { type: "spring", duration: 1.2, bounce: 0, delay: 0.1 }
+            },
+            exit: {
+                scale: 0.2,
+                opacity: 0,
+                transition: { duration: 0.8, ease: "easeInOut" }
+            }
+        }
     };
 
     // Calculate drag constraints
@@ -85,11 +94,10 @@ const GalaxyCanvas = () => {
                 dragElastic={0.1}
                 style={{ width: '200%', height: '200%', left: '-50%', top: '-50%' }}
             >
-                <AnimatePresence mode="wait" custom={isZoomedIn}>
+                <AnimatePresence mode="wait">
                     <motion.div
                         key={orbitSystem}
-                        custom={isZoomedIn}
-                        variants={variants}
+                        variants={variants[orbitSystem]} // Use specific variants for the current system
                         initial="initial"
                         animate="animate"
                         exit="exit"

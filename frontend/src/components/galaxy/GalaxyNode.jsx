@@ -6,11 +6,13 @@ const GalaxyNode = ({ id, label, x, y, type = 'node', onClick }) => {
     const getStarConfig = () => {
         switch (type) {
             case 'portal':
-                return { variant: 'portal', size: 80 };
+                return { variant: 'portal', size: 70 };
             case 'project':
                 return { variant: 'project', size: 40 };
+            case 'blackhole':
+                return { variant: 'blackhole', size: 100 };
             default:
-                return { variant: 'default', size: 56 };
+                return { variant: 'default', size: 45 };
         }
     };
 
