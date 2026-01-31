@@ -1,4 +1,4 @@
-import spaceBg from '../assets/space-bg.webp';
+import spaceBg from '../assets/image_assets/space-bg.webp';
 
 const StarBackground = ({ className = "fixed" }) => {
   return (

@@ -9,10 +9,10 @@ import SectionOverlay from './SectionOverlay';
 import ActiveProjectOverlay from './ActiveProjectOverlay';
 import GalaxyBackground from './GalaxyBackground';
 import { content } from '../../data/content';
-import nebulaBg from '../../assets/nebula-bg.webp';
-import star1 from '../../assets/star1.webp';
-import star2 from '../../assets/star2.webp';
-import starCluster from '../../assets/starcluster.webp';
+import nebulaBg from '../../assets/image_assets/nebula-bg.webp';
+import star1 from '../../assets/icon_assets/star1.webp';
+import star2 from '../../assets/icon_assets/star2.webp';
+import starCluster from '../../assets/icon_assets/starcluster.webp';
 
 const GalaxyCanvas = () => {
     const orbitSystem = useStore((state) => state.orbitSystem);
