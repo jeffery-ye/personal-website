@@ -68,7 +68,7 @@ export const content = {
       ],
       nodes: [
         { id: 'hero', type: 'node' },
-        { id: 'about', type: 'node' },
+        { id: 'about', type: 'blackhole' },
         { id: 'resume', type: 'node' },
         { id: 'projects-portal', type: 'portal', target: 'projects' },
       ]

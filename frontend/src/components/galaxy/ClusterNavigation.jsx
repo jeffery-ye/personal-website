@@ -18,12 +18,12 @@ const ClusterNavigation = () => {
             <button
                 onClick={() => setOrbitSystem('home')}
                 className="flex items-center gap-3 group text-nebula-cyan hover:text-white transition-colors"
-                aria-label="Back to Universe"
+                aria-label="Return to Galaxy"
             >
                 <div className="p-3 rounded-full bg-space-900 border border-space-700 group-hover:border-nebula-cyan transition-colors">
                     <ArrowLeft size={24} />
                 </div>
-                <span className="font-mono text-lg tracking-wider uppercase font-semibold">Return to Universe</span>
+                <span className="font-mono text-lg tracking-wider uppercase font-semibold">Return to Galaxy</span>
             </button>
         </motion.div>
     );

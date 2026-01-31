@@ -1,19 +1,22 @@
 import { motion } from 'framer-motion';
-import star1 from '../../assets/star1.webp';
-import star2 from '../../assets/star2.webp';
-import starCluster from '../../assets/starcluster.webp';
+import StarIcon from './StarIcon';
 
 const GalaxyNode = ({ id, label, x, y, type = 'node', onClick }) => {
+    // Map node types to StarIcon variants and sizes
+    const getStarConfig = () => {
+        switch (type) {
+            case 'portal':
+                return { variant: 'portal', size: 70 };
+            case 'project':
+                return { variant: 'project', size: 40 };
+            case 'blackhole':
+                return { variant: 'blackhole', size: 100 };
+            default:
+                return { variant: 'default', size: 45 };
+        }
+    };
 
-    let starImage = star1;
-    let sizeClass = "w-24 h-24";
-    if (type === 'portal') {
-        starImage = starCluster;
-        sizeClass = "w-24 h-24";
-    } else if (type === 'project') {
-        starImage = star2;
-        sizeClass = "w-12 h-12";
-    }
+    const { variant, size } = getStarConfig();
 
     return (
         <div
@@ -26,18 +29,13 @@ const GalaxyNode = ({ id, label, x, y, type = 'node', onClick }) => {
         >
             <motion.div
                 layoutId={id}
-                className={`cursor-pointer flex items-center justify-center ${sizeClass}`}
+                className="cursor-pointer flex items-center justify-center"
                 whileHover={{ scale: 1.15 }}
                 whileTap={{ scale: 0.9 }}
                 onClick={onClick}
                 transition={{ type: "spring", stiffness: 400, damping: 25 }}
             >
-                <img
-                    src={starImage}
-                    alt={label}
-                    className="w-full h-full object-contain mix-blend-screen"
-                    style={{ filter: 'brightness(1.5) contrast(1.2)' }} // Optional boost to make them pop against space
-                />
+                <StarIcon variant={variant} size={size} />
             </motion.div>
 
             {/* Label - Always visible beneath star */}

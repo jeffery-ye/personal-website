@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { ArrowRight, FileText, Github, Linkedin } from 'lucide-react';
-import headshot from '../assets/headshot.webp';
+import headshot from '../assets/image_assets/headshot.webp';
 import { content } from '../data/content';
 import { useStore } from '../store/useStore';
 import GradientText from '../components/GradientText';
