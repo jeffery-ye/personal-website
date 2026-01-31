@@ -62,6 +62,7 @@ export const content = {
       id: 'home',
       connections: [
         ['hero', 'about'],
+        ['hero', 'resume'],
         ['about', 'resume'],
         ['hero', 'projects-portal'],
       ],
@@ -113,10 +114,9 @@ export const content = {
     y: -150,
   },
 
-  // PROJECTS PORTAL (Replaces the cluster)
   'projects-portal': {
     id: 'projects-portal',
-    label: "Projects Cluster",
+    label: "Projects",
     x: 300,
     y: 100,
   },

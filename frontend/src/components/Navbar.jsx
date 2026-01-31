@@ -22,14 +22,25 @@ const Navbar = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
 
-          <Link to="/" className="flex items-center space-x-2 text-nebula-purple hover:text-nebula-cyan transition-colors">
+          <Link
+            to="/"
+            className="flex items-center space-x-2 text-nebula-purple hover:text-nebula-cyan transition-colors"
+            onClick={(e) => {
+              if (viewMode === 'galaxy') {
+                e.preventDefault();
+                const { setOrbitSystem, setActiveSection } = useStore.getState().actions;
+                setOrbitSystem('home');
+                setActiveSection('hero');
+              }
+            }}
+          >
             <Telescope size={28} />
             <span className="font-bold text-xl tracking-tight text-star-100">Jeffery Ye</span>
           </Link>
 
           {/* Desktop Menu */}
-          <div className="hidden md:block">
-            <div className="ml-10 flex items-baseline space-x-4">
+          <div className="hidden md:flex flex-1 items-center justify-center">
+            <div className="flex items-baseline space-x-4">
               {navLinks.map((link) => (
                 <Link
                   key={link.name}
@@ -51,14 +62,14 @@ const Navbar = () => {
                           break;
                         case '/about':
                           setOrbitSystem('home');
-                          // Ideally pan to about, but for now system switch is key
-                          // We can also trigger node activation if we implemented that logic independently
+                          setActiveSection('about');
                           break;
                         case '/projects':
                           setOrbitSystem('projects');
                           break;
                         case '/resume':
                           setOrbitSystem('home');
+                          setActiveSection('resume');
                           break;
                         default:
                           setOrbitSystem('home');
@@ -69,19 +80,21 @@ const Navbar = () => {
                   {link.name}
                 </Link>
               ))}
-
-              {!isMobile && (
-                <button
-                  onClick={toggleViewMode}
-                  className={`ml-4 p-2 rounded-md transition-colors ${viewMode === 'galaxy' ? 'text-nebula-cyan bg-space-800' : 'text-star-400 hover:text-nebula-cyan hover:bg-space-900'
-                    }`}
-                  title={viewMode === 'list' ? "Switch to Galaxy View" : "Switch to List View"}
-                >
-                  {viewMode === 'list' ? <Telescope size={20} /> : <List size={20} />}
-                </button>
-              )}
             </div>
           </div>
+
+          {/* View Mode Toggle - Desktop */}
+          {!isMobile && (
+            <button
+              onClick={toggleViewMode}
+              className="hidden md:flex items-center gap-2 px-4 py-2 rounded-full border-2 border-nebula-purple/50 text-star-100 font-medium hover:bg-nebula-purple/10 hover:border-nebula-purple hover:text-white transition-all duration-300"
+            >
+              {viewMode === 'galaxy' ? <List size={18} /> : <Telescope size={18} />}
+              <span className="text-sm">
+                {viewMode === 'galaxy' ? 'Switch to Normal View' : 'Switch to Constellation View'}
+              </span>
+            </button>
+          )}
 
           {/* Mobile Menu Button */}
           <div className="-mr-2 flex md:hidden">
@@ -110,9 +123,9 @@ const Navbar = () => {
                     const { setOrbitSystem, setActiveSection } = useStore.getState().actions;
                     switch (link.path) {
                       case '/': setOrbitSystem('home'); setActiveSection('hero'); break;
-                      case '/about': setOrbitSystem('home'); break;
+                      case '/about': setOrbitSystem('home'); setActiveSection('about'); break;
                       case '/projects': setOrbitSystem('projects'); break;
-                      case '/resume': setOrbitSystem('home'); break;
+                      case '/resume': setOrbitSystem('home'); setActiveSection('resume'); break;
                       default: setOrbitSystem('home');
                     }
                   }

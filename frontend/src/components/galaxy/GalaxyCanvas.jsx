@@ -10,6 +10,9 @@ import ActiveProjectOverlay from './ActiveProjectOverlay';
 import GalaxyBackground from './GalaxyBackground';
 import { content } from '../../data/content';
 import nebulaBg from '../../assets/nebula-bg.webp';
+import star1 from '../../assets/star1.webp';
+import star2 from '../../assets/star2.webp';
+import starCluster from '../../assets/starcluster.webp';
 
 const GalaxyCanvas = () => {
     const orbitSystem = useStore((state) => state.orbitSystem);
@@ -19,8 +22,16 @@ const GalaxyCanvas = () => {
 
     // Preload Nebula Image
     useEffect(() => {
-        const img = new Image();
-        img.src = nebulaBg;
+        const imagesToPreload = [nebulaBg, star1, star2, starCluster];
+        imagesToPreload.forEach(async (src) => {
+            const img = new Image();
+            img.src = src;
+            try {
+                await img.decode();
+            } catch (e) {
+                console.warn("Failed to decode image", src);
+            }
+        });
     }, []);
 
     // Get current system data
@@ -49,7 +60,7 @@ const GalaxyCanvas = () => {
     };
 
     // Calculate drag constraints
-    const maxDrag = 1000;
+    const maxDrag = 400;
 
     // Portal position for transform origin (Home system)
     const portalNode = content['projects-portal'];
@@ -66,7 +77,7 @@ const GalaxyCanvas = () => {
 
             {/* Draggable Canvas - Disable interaction when overlay is open */}
             <motion.div
-                className={`absolute inset-0 cursor-grab active:cursor-grabbing ${activeSection || activeProjectId ? 'pointer-events-none' : ''}`}
+                className={`absolute cursor-grab active:cursor-grabbing ${activeSection || activeProjectId ? 'pointer-events-none' : ''}`}
                 drag
                 dragConstraints={{
                     left: - maxDrag, right: maxDrag, top: -maxDrag, bottom: maxDrag

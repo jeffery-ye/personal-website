@@ -1,13 +1,19 @@
 import { motion } from 'framer-motion';
+import star1 from '../../assets/star1.webp';
+import star2 from '../../assets/star2.webp';
+import starCluster from '../../assets/starcluster.webp';
 
+const GalaxyNode = ({ id, label, x, y, type = 'node', onClick, shouldAnimate = true }) => {
 
-const GalaxyNode = ({ id, label, x, y, type = 'node', color = 'bg-white', size = 'w-4 h-4', onClick, shouldAnimate = true }) => {
-
-
-    // Portal Styling (e.g. Projects Cluster)
-    const isPortal = type === 'portal';
-    const finalColor = isPortal ? 'bg-amber-100 shadow-[0_0_30px_rgba(251,191,36,0.6)]' : color;
-    const finalSize = isPortal ? 'w-12 h-12' : size;
+    let starImage = star1;
+    let sizeClass = "w-24 h-24";
+    if (type === 'portal') {
+        starImage = starCluster;
+        sizeClass = "w-24 h-24";
+    } else if (type === 'project') {
+        starImage = star2;
+        sizeClass = "w-12 h-12";
+    }
 
     return (
         <div
@@ -20,24 +26,24 @@ const GalaxyNode = ({ id, label, x, y, type = 'node', color = 'bg-white', size =
         >
             <motion.div
                 layoutId={id}
-                className={`cursor-pointer rounded-full flex items-center justify-center ${finalColor} ${finalSize} ${!isPortal && 'shadow-lg shadow-white/30'}`}
-                whileHover={{ scale: 1.5 }}
+                className={`cursor-pointer flex items-center justify-center ${sizeClass}`}
                 whileTap={{ scale: 0.9 }}
                 onClick={onClick}
                 transition={{ type: "spring", stiffness: 400, damping: 25 }}
             >
-                {/* Inner core for portals to make it look like a cluster */}
-                {isPortal && shouldAnimate && (
-                    <motion.div
-                        className="w-full h-full rounded-full bg-amber-400 blur-md opacity-50"
-                        animate={{ scale: [1, 1.2, 1], opacity: [0.5, 0.8, 0.5] }}
-                        transition={{ duration: 3, repeat: Infinity }}
-                    />
-                )}
+                <img
+                    src={starImage}
+                    alt={label}
+                    className="w-full h-full object-contain mix-blend-screen"
+                    style={{ filter: 'brightness(1.5) contrast(1.2)' }} // Optional boost to make them pop against space
+                />
             </motion.div>
 
             {/* Label - Always visible beneath star */}
-            <div className="absolute top-full left-1/2 -translate-x-1/2 mt-3 px-2 py-1 bg-space-900/60 backdrop-blur-sm rounded text-xs text-star-100 whitespace-nowrap drop-shadow-lg pointer-events-none">
+            <div
+                className="absolute top-full left-1/2 mt-3 px-2 py-1 bg-space-900/60 backdrop-blur-sm rounded text-xs text-star-100 whitespace-nowrap drop-shadow-lg pointer-events-none border border-space-700/50"
+                style={{ transform: 'translateX(-50%) translateZ(0)' }}
+            >
                 {label}
             </div>
         </div>

@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import { ArrowRight, FileText, Github, Linkedin } from 'lucide-react';
 import headshot from '../assets/headshot.webp';
 import { content } from '../data/content';
+import { useStore } from '../store/useStore';
 import GradientText from '../components/GradientText';
 
 const Home = () => {
@@ -34,6 +35,15 @@ const Home = () => {
             <Link
               to="/projects"
               className="font-display group inline-flex items-center gap-2 px-6 py-3 bg-nebula-cyan text-space-950 font-bold rounded-full hover:bg-white transition-all duration-300 transform hover:scale-105 shadow-[0_0_20px_rgba(34,211,238,0.3)]"
+              onClick={(e) => {
+                const { viewMode } = useStore.getState();
+                if (viewMode === 'galaxy') {
+                  e.preventDefault();
+                  const { setOrbitSystem, clearActiveSection } = useStore.getState().actions;
+                  clearActiveSection();
+                  setOrbitSystem('projects');
+                }
+              }}
             >
               View Projects
               <ArrowRight className="group-hover:translate-x-1 transition-transform" />
@@ -42,6 +52,14 @@ const Home = () => {
             <Link
               to="/resume"
               className="font-display inline-flex items-center gap-2 px-6 py-3 border-2 border-nebula-purple/50 text-star-100 font-medium rounded-full hover:bg-nebula-purple/10 hover:border-nebula-purple hover:text-white transition-all duration-300 drop-shadow-lg"
+              onClick={(e) => {
+                const { viewMode } = useStore.getState();
+                if (viewMode === 'galaxy') {
+                  e.preventDefault();
+                  const { setActiveSection } = useStore.getState().actions;
+                  setActiveSection('resume');
+                }
+              }}
             >
               <FileText size={18} />
               Resume
