@@ -5,11 +5,11 @@ import GradientText from '../components/GradientText';
 const Projects = () => {
   return (
     <div className="space-y-12">
-      
+
       <div className="text-center space-y-4">
         <div className="text-white pt-10">
           <GradientText
-            colors={["#26efff","#921aff","#fa2bff"]}
+            colors={["#26efff", "#921aff", "#fa2bff"]}
             animationSpeed={3}
             showBorder={false}
             yoyo={false}
@@ -21,11 +21,11 @@ const Projects = () => {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {content.projects.map((project) => (
+        {content.projects.data.map((project) => (
           <ProjectCard key={project.id} project={project} />
         ))}
       </div>
-      
+
     </div>
   );
 };
