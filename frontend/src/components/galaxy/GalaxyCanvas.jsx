@@ -1,14 +1,19 @@
 import { motion, AnimatePresence } from 'framer-motion';
 import { useStore, useStoreActions } from '../../store/useStore';
-import { content } from '../../data/content';
+
 import GalaxyNode from './GalaxyNode';
 import ConstellationLines from './ConstellationLines';
-import ActiveProjectOverlay from './ActiveProjectOverlay';
 import ClusterNavigation from './ClusterNavigation';
+import SectionOverlay from './SectionOverlay';
+import ActiveProjectOverlay from './ActiveProjectOverlay';
+import GalaxyBackground from './GalaxyBackground';
+import { content } from '../../data/content';
 
 const GalaxyCanvas = () => {
     const orbitSystem = useStore((state) => state.orbitSystem);
-    const { setActiveProject, setOrbitSystem } = useStoreActions();
+    const activeProjectId = useStore((state) => state.activeProjectId);
+    const activeSection = useStore((state) => state.activeSection);
+    const { setActiveProject, setOrbitSystem, setActiveSection } = useStoreActions();
 
     // Get current system data
     const currentSystem = content.systems[orbitSystem];
@@ -45,13 +50,15 @@ const GalaxyCanvas = () => {
         : 'center center';
 
     return (
-        <div className="fixed inset-0 top-16 overflow-hidden bg-space-950" >
+        <div className="fixed inset-0 top-16 overflow-hidden" >
+            <GalaxyBackground />
             {/* Navigation UI */}
             < ClusterNavigation />
+            <SectionOverlay />
 
-            {/* Draggable Canvas */}
-            < motion.div
-                className="absolute inset-0 cursor-grab active:cursor-grabbing"
+            {/* Draggable Canvas - Disable interaction when overlay is open */}
+            <motion.div
+                className={`absolute inset-0 cursor-grab active:cursor-grabbing ${activeSection || activeProjectId ? 'pointer-events-none' : ''}`}
                 drag
                 dragConstraints={{
                     left: - maxDrag, right: maxDrag, top: -maxDrag, bottom: maxDrag
@@ -90,12 +97,15 @@ const GalaxyCanvas = () => {
                                     y={nodeData.y}
                                     type={node.type}
                                     color={node.id === 'home' ? 'bg-nebula-cyan' : node.id === 'about' ? 'bg-nebula-purple' : 'bg-white'}
+                                    shouldAnimate={!activeSection && !activeProjectId} // Disable animations if overlay is open
                                     // Portal Handling
                                     onClick={() => {
                                         if (node.type === 'portal') {
                                             setOrbitSystem(node.target);
                                         } else if (node.type === 'project') {
                                             setActiveProject(node.data.id);
+                                        } else {
+                                            setActiveSection(node.id);
                                         }
                                     }}
                                 />

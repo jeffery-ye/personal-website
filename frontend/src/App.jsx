@@ -1,5 +1,4 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import StarBackground from './components/StarBackground';
 import ViewManager from './components/ViewManager';
 import { useHardwareCheck } from './hooks/useHardwareCheck';
 import Home from './pages/Home';
@@ -13,8 +12,6 @@ function App() {
   return (
     <Router>
       <div className="min-h-screen bg-space-950 text-star-100 font-sans selection:bg-nebula-purple selection:text-white">
-        <StarBackground />
-
         <ViewManager>
           <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
             <Routes>

@@ -35,9 +35,36 @@ const Navbar = () => {
                   key={link.name}
                   to={link.path}
                   className={`px-3 py-2 rounded-md text-sm font-medium transition-colors ${isActive(link.path)
-                      ? 'bg-space-800 text-nebula-purple' // 
-                      : 'text-star-400 hover:text-nebula-cyan hover:bg-space-900'
+                    ? 'bg-space-800 text-nebula-purple'
+                    : 'text-star-400 hover:text-nebula-cyan hover:bg-space-900'
                     }`}
+                  onClick={(e) => {
+                    if (viewMode === 'galaxy') {
+                      e.preventDefault();
+                      const { setOrbitSystem, setActiveSection, setActiveProject } = useStore.getState().actions;
+
+                      // Map paths to systems/nodes
+                      switch (link.path) {
+                        case '/':
+                          setOrbitSystem('home');
+                          setActiveSection('hero'); // Or clear active section
+                          break;
+                        case '/about':
+                          setOrbitSystem('home');
+                          // Ideally pan to about, but for now system switch is key
+                          // We can also trigger node activation if we implemented that logic independently
+                          break;
+                        case '/projects':
+                          setOrbitSystem('projects');
+                          break;
+                        case '/resume':
+                          setOrbitSystem('home');
+                          break;
+                        default:
+                          setOrbitSystem('home');
+                      }
+                    }
+                  }}
                 >
                   {link.name}
                 </Link>
@@ -76,10 +103,23 @@ const Navbar = () => {
               <Link
                 key={link.name}
                 to={link.path}
-                onClick={() => setIsOpen(false)}
+                onClick={(e) => {
+                  setIsOpen(false);
+                  if (viewMode === 'galaxy') {
+                    e.preventDefault();
+                    const { setOrbitSystem, setActiveSection } = useStore.getState().actions;
+                    switch (link.path) {
+                      case '/': setOrbitSystem('home'); setActiveSection('hero'); break;
+                      case '/about': setOrbitSystem('home'); break;
+                      case '/projects': setOrbitSystem('projects'); break;
+                      case '/resume': setOrbitSystem('home'); break;
+                      default: setOrbitSystem('home');
+                    }
+                  }
+                }}
                 className={`block px-3 py-2 rounded-md text-base font-medium transition-colors ${isActive(link.path)
-                    ? 'bg-space-800 text-nebula-cyan'
-                    : 'text-star-400 hover:text-nebula-purple hover:bg-space-900'
+                  ? 'bg-space-800 text-nebula-cyan'
+                  : 'text-star-400 hover:text-nebula-purple hover:bg-space-900'
                   }`}
               >
                 {link.name}

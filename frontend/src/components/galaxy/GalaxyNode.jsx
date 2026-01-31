@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
 
 
-const GalaxyNode = ({ id, label, x, y, type = 'node', color = 'bg-white', size = 'w-4 h-4', onClick }) => {
+const GalaxyNode = ({ id, label, x, y, type = 'node', color = 'bg-white', size = 'w-4 h-4', onClick, shouldAnimate = true }) => {
 
 
     // Portal Styling (e.g. Projects Cluster)
@@ -27,7 +27,7 @@ const GalaxyNode = ({ id, label, x, y, type = 'node', color = 'bg-white', size =
                 transition={{ type: "spring", stiffness: 400, damping: 25 }}
             >
                 {/* Inner core for portals to make it look like a cluster */}
-                {isPortal && (
+                {isPortal && shouldAnimate && (
                     <motion.div
                         className="w-full h-full rounded-full bg-amber-400 blur-md opacity-50"
                         animate={{ scale: [1, 1.2, 1], opacity: [0.5, 0.8, 0.5] }}
