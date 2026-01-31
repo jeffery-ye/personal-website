@@ -6,7 +6,7 @@ const projectsData = [
     title: "AI Protein Purification Agent",
     description: "An agentic workflow to create and optimize protein purification protocols, reducing manual experimental design time by over 95%.",
     tags: ["AI Agents", "Full-Stack", "Python", "Work"],
-    link: "https://github.com/yourusername/repo",
+    link: "#",
     icon: FlaskConical
   },
   {
@@ -44,7 +44,7 @@ const projectsData = [
   {
     id: 6,
     title: "Crumbdrop",
-    description: "An anti-food waste website built with ExpressJS, allowing users to post food that they are giving away.",
+    description: "An anti-food waste website built with ExpressJS, allowing users to post and give away food that they would have otherwise thrown away.",
     tags: ["Web Dev", "ExpressJS", "Group Project"],
     link: "https://github.com/jasmina-dev/crumbdrop",
     icon: Cookie
@@ -144,6 +144,7 @@ export const content = {
 
   resume: {
     id: 'resume',
+    label: "Resume",
     title: "Resume",
     x: -150,
     y: 250,

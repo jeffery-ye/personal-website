@@ -128,8 +128,6 @@ const GalaxyCanvas = () => {
                                     x={nodeData.x}
                                     y={nodeData.y}
                                     type={node.type}
-                                    color={node.id === 'home' ? 'bg-nebula-cyan' : node.id === 'about' ? 'bg-nebula-purple' : 'bg-white'}
-                                    shouldAnimate={!activeSection && !activeProjectId} // Disable animations if overlay is open
                                     // Portal Handling
                                     onClick={() => {
                                         if (node.type === 'portal') {

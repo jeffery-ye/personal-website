@@ -52,7 +52,7 @@ const Navbar = () => {
                   onClick={(e) => {
                     if (viewMode === 'galaxy') {
                       e.preventDefault();
-                      const { setOrbitSystem, setActiveSection, setActiveProject } = useStore.getState().actions;
+                      const { setOrbitSystem, setActiveSection } = useStore.getState().actions;
 
                       // Map paths to systems/nodes
                       switch (link.path) {

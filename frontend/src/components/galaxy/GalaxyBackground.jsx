@@ -1,10 +1,7 @@
 import { motion, AnimatePresence } from 'framer-motion';
-import { useStore } from '../../store/useStore';
 import StarBackground from '../StarBackground';
 
 const GalaxyBackground = () => {
-    const orbitSystem = useStore((state) => state.orbitSystem);
-
     return (
         <div className="absolute inset-0 z-0 pointer-events-none bg-space-950 overflow-hidden">
             <AnimatePresence mode="popLayout" initial={false}>

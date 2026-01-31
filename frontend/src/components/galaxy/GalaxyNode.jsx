@@ -3,7 +3,7 @@ import star1 from '../../assets/star1.webp';
 import star2 from '../../assets/star2.webp';
 import starCluster from '../../assets/starcluster.webp';
 
-const GalaxyNode = ({ id, label, x, y, type = 'node', onClick, shouldAnimate = true }) => {
+const GalaxyNode = ({ id, label, x, y, type = 'node', onClick }) => {
 
     let starImage = star1;
     let sizeClass = "w-24 h-24";
@@ -27,6 +27,7 @@ const GalaxyNode = ({ id, label, x, y, type = 'node', onClick, shouldAnimate = t
             <motion.div
                 layoutId={id}
                 className={`cursor-pointer flex items-center justify-center ${sizeClass}`}
+                whileHover={{ scale: 1.15 }}
                 whileTap={{ scale: 0.9 }}
                 onClick={onClick}
                 transition={{ type: "spring", stiffness: 400, damping: 25 }}
@@ -41,8 +42,8 @@ const GalaxyNode = ({ id, label, x, y, type = 'node', onClick, shouldAnimate = t
 
             {/* Label - Always visible beneath star */}
             <div
-                className="absolute top-full left-1/2 mt-3 px-2 py-1 bg-space-900/60 backdrop-blur-sm rounded text-xs text-star-100 whitespace-nowrap drop-shadow-lg pointer-events-none border border-space-700/50"
-                style={{ transform: 'translateX(-50%) translateZ(0)' }}
+                className="absolute top-full left-1/2 mt-3 px-2 py-1 bg-space-900/90 rounded text-xs text-star-100 whitespace-nowrap drop-shadow-lg pointer-events-none border border-space-700/50"
+                style={{ transform: 'translateX(-50%) translateZ(0)', willChange: 'transform' }}
             >
                 {label}
             </div>
