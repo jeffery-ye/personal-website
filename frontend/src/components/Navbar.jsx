@@ -1,8 +1,10 @@
 import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X, Telescope } from 'lucide-react';
+import { Menu, X, Telescope, List } from 'lucide-react';
+import { useStore } from '../store/useStore';
 
 const Navbar = () => {
+  const { viewMode, isMobile, actions: { toggleViewMode } } = useStore();
   const [isOpen, setIsOpen] = useState(false);
   const location = useLocation();
 
@@ -19,7 +21,7 @@ const Navbar = () => {
     <nav className="bg-space-950/80 backdrop-blur-md border-b border-space-800 sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
-          
+
           <Link to="/" className="flex items-center space-x-2 text-nebula-purple hover:text-nebula-cyan transition-colors">
             <Telescope size={28} />
             <span className="font-bold text-xl tracking-tight text-star-100">Jeffery Ye</span>
@@ -32,15 +34,25 @@ const Navbar = () => {
                 <Link
                   key={link.name}
                   to={link.path}
-                  className={`px-3 py-2 rounded-md text-sm font-medium transition-colors ${
-                    isActive(link.path)
+                  className={`px-3 py-2 rounded-md text-sm font-medium transition-colors ${isActive(link.path)
                       ? 'bg-space-800 text-nebula-purple' // 
-                      : 'text-star-400 hover:text-nebula-cyan hover:bg-space-900' 
-                  }`}
+                      : 'text-star-400 hover:text-nebula-cyan hover:bg-space-900'
+                    }`}
                 >
                   {link.name}
                 </Link>
               ))}
+
+              {!isMobile && (
+                <button
+                  onClick={toggleViewMode}
+                  className={`ml-4 p-2 rounded-md transition-colors ${viewMode === 'galaxy' ? 'text-nebula-cyan bg-space-800' : 'text-star-400 hover:text-nebula-cyan hover:bg-space-900'
+                    }`}
+                  title={viewMode === 'list' ? "Switch to Galaxy View" : "Switch to List View"}
+                >
+                  {viewMode === 'list' ? <Telescope size={20} /> : <List size={20} />}
+                </button>
+              )}
             </div>
           </div>
 
@@ -64,12 +76,11 @@ const Navbar = () => {
               <Link
                 key={link.name}
                 to={link.path}
-                onClick={() => setIsOpen(false)} 
-                className={`block px-3 py-2 rounded-md text-base font-medium transition-colors ${
-                  isActive(link.path)
-                    ? 'bg-space-800 text-nebula-cyan' 
+                onClick={() => setIsOpen(false)}
+                className={`block px-3 py-2 rounded-md text-base font-medium transition-colors ${isActive(link.path)
+                    ? 'bg-space-800 text-nebula-cyan'
                     : 'text-star-400 hover:text-nebula-purple hover:bg-space-900'
-                }`}
+                  }`}
               >
                 {link.name}
               </Link>
