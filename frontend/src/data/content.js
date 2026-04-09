@@ -1,4 +1,4 @@
-import { Code2, FlaskConical, Folder, Pill, CreditCard, Calendar1, Cookie } from 'lucide-react';
+import { Code2, FlaskConical, Folder, Pill, CreditCard, Calendar1, Cookie, BriefcaseMedical } from 'lucide-react';
 
 const projectsData = [
   {
@@ -43,6 +43,15 @@ const projectsData = [
   },
   {
     id: 6,
+    title: "AI Medical Chart Parser",
+    description: "A full-stack agentic AI solution that automatically synthesizes information across disparate medical files and records to create an individualized treatment plan (ITP) for patients. This project was created in collaboration with Kivo Health for the UW Informatics Capstone.",
+    tags: ["AI Agents", "Full-Stack", "Python", "Capstone"],
+    link: "#",
+    icon: BriefcaseMedical
+  },
+
+  {
+    id: 7,
     title: "Crumbdrop",
     description: "An anti-food waste website built with ExpressJS, allowing users to post and give away food that they would have otherwise thrown away.",
     tags: ["Web Dev", "ExpressJS", "Group Project"],
@@ -130,7 +139,8 @@ export const content = {
       { x: -20, y: 50 },    // musicalendar
       { x: -50, y: -100 },      // ai expense categorizer
       { x: -250, y: -140 },   // portfolio website
-      { x: -450, y: 0 }   // crumbdrop
+      { x: -450, y: 0 },   // ai medical chart parser
+      { x: -278, y: 100 }   // crumbdrop
     ];
     const offset = offsets[index] || { x: 0, y: 0 };
 
