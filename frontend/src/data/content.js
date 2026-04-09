@@ -85,11 +85,11 @@ export const content = {
     home: {
       id: 'home',
       connections: [
-        ['hero', 'about'],
+        ['projects-portal', 'publications-portal'],
         ['hero', 'resume'],
-        ['about', 'resume'],
-        ['hero', 'projects-portal'],
-        ['resume', 'publications-portal'],
+        ['resume', 'projects-portal'],
+        ['hero', 'publications-portal'],
+        ['about', 'publications-portal'],
       ],
       nodes: [
         { id: 'hero', type: 'node' },
@@ -126,8 +126,8 @@ export const content = {
     subtitle: "Software and AI Engineer",
     tagline: "tagline",
     cta: "View Projects",
-    x: 0,
-    y: 0,
+    x: -20,
+    y: -40,
   },
 
   // ABOUT PAGE CONTENT
@@ -141,22 +141,30 @@ export const content = {
       "Outside of work, I can often be found rock climbing (cliché, I know). I mostly focus on indoor bouldering, but have been known to climb outdoors. I'm also a big fan of sci-fi, no matter if its through books, movies, TV shows, or video games. I've always been fascinated by space, astronomy, speculative exobiology, and more—hence the star theming of this website.",
       "Interested in working with me, chatting about my hobbies, or anything in between? Feel free to reach out through my LinkedIn or Email!"
     ],
-    x: -250,
-    y: -150,
+    x: 300,
+    y: -170,
   },
 
   'projects-portal': {
     id: 'projects-portal',
     label: "Projects",
-    x: 300,
-    y: 100,
+    x: 50,
+    y: 130,
   },
 
   'publications-portal': {
     id: 'publications-portal',
     label: "Publications",
+    x: 230,
+    y: 30,
+  },
+
+  resume: {
+    id: 'resume',
+    label: "Resume",
+    title: "Resume",
     x: -300,
-    y: 350,
+    y: -15,
   },
 
   // INDIVIDUAL PROJECTS (For reference by ID)
@@ -195,13 +203,5 @@ export const content = {
       y: offset.y
     };
     return acc;
-  }, {}),
-
-  resume: {
-    id: 'resume',
-    label: "Resume",
-    title: "Resume",
-    x: -150,
-    y: 250,
-  }
+  }, {})
 };

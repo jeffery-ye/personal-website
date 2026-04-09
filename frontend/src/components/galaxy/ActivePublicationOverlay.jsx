@@ -47,7 +47,7 @@ const ActivePublicationOverlay = () => {
                         animate={{ opacity: 1, scale: 1, x: '-50%', y: '-50%' }}
                         exit={{ opacity: 0, scale: 0.8, x: '-50%', y: '-50%' }}
                         transition={{ type: 'spring', duration: 0.5, bounce: 0.3 }}
-                        className="fixed top-1/2 left-1/2 z-50 w-full max-w-lg bg-space-900 rounded-xl shadow-2xl shadow-nebula-cyan/20 border border-space-700"
+                        className="fixed top-1/2 left-1/2 z-50 w-full max-w-4xl bg-space-900 rounded-xl shadow-2xl shadow-red-500/20 border border-space-700"
                     >
                         {/* Close Button */}
                         <button

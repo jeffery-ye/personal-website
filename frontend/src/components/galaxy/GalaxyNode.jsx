@@ -10,7 +10,7 @@ const GalaxyNode = ({ id, label, x, y, type = 'node', onClick }) => {
             case 'project':
                 return { variant: 'project', size: 40 };
             case 'publication':
-                return { variant: 'project', size: 40 }; // reuse project style for publications
+                return { variant: 'default', size: 45, color: '#ef4444', secondaryColor: '#dc2626' }; // single star, bright red
             case 'blackhole':
                 return { variant: 'blackhole', size: 100 };
             default:
@@ -18,7 +18,7 @@ const GalaxyNode = ({ id, label, x, y, type = 'node', onClick }) => {
         }
     };
 
-    const { variant, size } = getStarConfig();
+    const { variant, size, color, secondaryColor } = getStarConfig();
 
     return (
         <div
@@ -37,7 +37,7 @@ const GalaxyNode = ({ id, label, x, y, type = 'node', onClick }) => {
                 onClick={onClick}
                 transition={{ type: "spring", stiffness: 400, damping: 25 }}
             >
-                <StarIcon variant={variant} size={size} />
+                <StarIcon variant={variant} size={size} color={color} secondaryColor={secondaryColor} />
             </motion.div>
 
             {/* Label - Always visible beneath star */}

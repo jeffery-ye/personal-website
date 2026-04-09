@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useStore, useStoreActions } from '../../store/useStore';
 
@@ -37,60 +37,79 @@ const GalaxyCanvas = () => {
     // Get current system data
     const currentSystem = content.systems[orbitSystem];
 
-    // Determine animation direction logic
-    // We now use specific variants for 'home' vs 'projects' to avoid state staleness issues during exit transitions.
-
-
     const variants = {
         home: {
-            initial: { scale: 5, opacity: 0 },
-            animate: {
+            initial: (ctx) => ({ scale: 5, opacity: 0, transformOrigin: ctx.homeOrigin }),
+            animate: (ctx) => ({
                 scale: 1,
                 opacity: 1,
+                transformOrigin: ctx.homeOrigin,
                 transition: { type: "spring", duration: 1.2, bounce: 0, delay: 0.1 }
-            },
-            exit: {
+            }),
+            exit: (ctx) => ({
                 scale: 5,
                 opacity: 0,
+                transformOrigin: ctx.homeOrigin,
                 transition: { duration: 0.8, ease: "easeInOut" }
-            }
+            })
         },
         projects: {
-            initial: { scale: 0.2, opacity: 0 },
-            animate: {
+            initial: (ctx) => ({ scale: 0.2, opacity: 0, transformOrigin: ctx.origins.projects }),
+            animate: (ctx) => ({
                 scale: 1,
                 opacity: 1,
+                transformOrigin: ctx.origins.projects,
                 transition: { type: "spring", duration: 1.2, bounce: 0, delay: 0.1 }
-            },
-            exit: {
+            }),
+            exit: (ctx) => ({
                 scale: 0.2,
                 opacity: 0,
+                transformOrigin: ctx.origins.projects,
                 transition: { duration: 0.8, ease: "easeInOut" }
-            }
+            })
         },
         publications: {
-            initial: { scale: 0.2, opacity: 0 },
-            animate: {
+            initial: (ctx) => ({ scale: 0.2, opacity: 0, transformOrigin: ctx.origins.publications }),
+            animate: (ctx) => ({
                 scale: 1,
                 opacity: 1,
+                transformOrigin: ctx.origins.publications,
                 transition: { type: "spring", duration: 1.2, bounce: 0, delay: 0.1 }
-            },
-            exit: {
+            }),
+            exit: (ctx) => ({
                 scale: 0.2,
                 opacity: 0,
+                transformOrigin: ctx.origins.publications,
                 transition: { duration: 0.8, ease: "easeInOut" }
-            }
+            })
         }
     };
 
     // Calculate drag constraints
     const maxDrag = 400;
 
-    // Portal position for transform origin (Home system)
-    const portalNode = content[`${orbitSystem}-portal`] || content['projects-portal'];
-    const transformOrigin = portalNode
-        ? `calc(50% + ${portalNode.x}px) calc(50% + ${portalNode.y}px)`
-        : 'center center';
+    // Portal position tracking for isolated transform origins
+    const getOrigin = (systemId) => {
+        const node = content[`${systemId}-portal`];
+        return node ? `calc(50% + ${node.x}px) calc(50% + ${node.y}px)` : 'center center';
+    };
+
+    const origins = {
+        projects: getOrigin('projects'),
+        publications: getOrigin('publications')
+    };
+
+    // To tell 'home' where to zoom to/from, we track the 'active' sub-system.
+    const lastSubSystemRef = useRef('projects');
+    if (orbitSystem !== 'home') {
+        lastSubSystemRef.current = orbitSystem;
+    }
+    const homeOrigin = origins[orbitSystem !== 'home' ? orbitSystem : lastSubSystemRef.current];
+
+    const animationContext = {
+        origins,
+        homeOrigin
+    };
 
     return (
         <div className="fixed inset-0 top-16 overflow-hidden" >
@@ -109,15 +128,15 @@ const GalaxyCanvas = () => {
                 dragElastic={0.1}
                 style={{ width: '200%', height: '200%', left: '-50%', top: '-50%' }}
             >
-                <AnimatePresence mode="wait">
+                <AnimatePresence mode="wait" custom={animationContext}>
                     <motion.div
                         key={orbitSystem}
+                        custom={animationContext}
                         variants={variants[orbitSystem]} // Use specific variants for the current system
                         initial="initial"
                         animate="animate"
                         exit="exit"
                         className="absolute inset-0 w-full h-full"
-                        style={{ transformOrigin }} // Dynamic origin based on portal location
                     >
                         {/* Constellation Lines */}
                         <ConstellationLines
