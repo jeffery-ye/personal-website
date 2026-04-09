@@ -1,0 +1,69 @@
+import { motion, AnimatePresence } from 'framer-motion';
+import { useEffect } from 'react';
+import { X } from 'lucide-react';
+import { useStore, useStoreActions } from '../../store/useStore';
+import PublicationCard from '../PublicationCard';
+import { content } from '../../data/content';
+
+const ActivePublicationOverlay = () => {
+    const activePublicationId = useStore((state) => state.activePublicationId);
+    const { clearActivePublication } = useStoreActions();
+
+    // Find the active publication data
+    const activePublication = activePublicationId
+        ? content[`publication-${activePublicationId}`]
+        : null;
+
+    // Close on Escape key
+    useEffect(() => {
+        const handleKeyDown = (e) => {
+            if (e.key === 'Escape') {
+                clearActivePublication();
+            }
+        };
+
+        if (activePublicationId) {
+            window.addEventListener('keydown', handleKeyDown);
+            return () => window.removeEventListener('keydown', handleKeyDown);
+        }
+    }, [activePublicationId, clearActivePublication]);
+
+    return (
+        <AnimatePresence>
+            {activePublication && (
+                <>
+                    {/* Backdrop */}
+                    <motion.div
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        className="fixed inset-0 bg-black/80 z-40"
+                        onClick={clearActivePublication}
+                    />
+
+                    {/* Card Container - Zoom in animation */}
+                    <motion.div
+                        initial={{ opacity: 0, scale: 0.8, x: '-50%', y: '-50%' }}
+                        animate={{ opacity: 1, scale: 1, x: '-50%', y: '-50%' }}
+                        exit={{ opacity: 0, scale: 0.8, x: '-50%', y: '-50%' }}
+                        transition={{ type: 'spring', duration: 0.5, bounce: 0.3 }}
+                        className="fixed top-1/2 left-1/2 z-50 w-full max-w-lg bg-space-900 rounded-xl shadow-2xl shadow-nebula-cyan/20 border border-space-700"
+                    >
+                        {/* Close Button */}
+                        <button
+                            onClick={clearActivePublication}
+                            className="absolute -top-12 right-0 p-2 text-star-400 hover:text-white transition-colors"
+                            aria-label="Close"
+                        >
+                            <X size={24} />
+                        </button>
+
+                        <PublicationCard publication={activePublication} />
+                    </motion.div>
+                </>
+            )}
+        </AnimatePresence>
+    );
+};
+
+export default ActivePublicationOverlay;

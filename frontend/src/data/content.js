@@ -1,4 +1,4 @@
-import { Code2, FlaskConical, Folder, Pill, CreditCard, Calendar1, Cookie, BriefcaseMedical } from 'lucide-react';
+import { Code2, FlaskConical, Folder, Pill, CreditCard, Calendar1, Cookie, BriefcaseMedical, FileText } from 'lucide-react';
 
 const projectsData = [
   {
@@ -60,10 +60,25 @@ const projectsData = [
   }
 ];
 
+const publicationsData = [
+  {
+    id: 1,
+    title: "Automated extraction and optimization of protein purification protocols using multi-agent large language models",
+    authors: ["Jeffery Ye", "Amy DeRocher", "Monique Khim", "Sandhya Subramanian", "Lisabeth Cron", "Peter J. Myler", "Isabelle Q. Phan"],
+    venue: "bioRxiv",
+    year: 2026,
+    abstract: "An agentic workflow to create and optimize protein purification protocols, reducing manual experimental design time by over 95%.",
+    tags: ["AI Agents", "Python", "Work"],
+    arxiv: "https://www.biorxiv.org/content/10.64898/2026.03.03.709341v1",
+    icon: FileText
+  }
+];
+
 export const content = {
   // CONFIGURATION
   // Project Data for List View
   projects: { data: projectsData },
+  publications: { data: publicationsData },
 
   // Define systems for navigation
   systems: {
@@ -74,12 +89,14 @@ export const content = {
         ['hero', 'resume'],
         ['about', 'resume'],
         ['hero', 'projects-portal'],
+        ['resume', 'publications-portal'],
       ],
       nodes: [
         { id: 'hero', type: 'node' },
         { id: 'about', type: 'blackhole' },
         { id: 'resume', type: 'node' },
         { id: 'projects-portal', type: 'portal', target: 'projects' },
+        { id: 'publications-portal', type: 'portal', target: 'publications' },
       ]
     },
     projects: {
@@ -93,6 +110,11 @@ export const content = {
         ['project-1', 'project-4'],
       ],
       nodes: projectsData.map(p => ({ id: `project-${p.id}`, type: 'project', data: p }))
+    },
+    publications: {
+      id: 'publications',
+      connections: [],
+      nodes: publicationsData.map(p => ({ id: `publication-${p.id}`, type: 'publication', data: p }))
     }
   },
 
@@ -130,6 +152,13 @@ export const content = {
     y: 100,
   },
 
+  'publications-portal': {
+    id: 'publications-portal',
+    label: "Publications",
+    x: -300,
+    y: 350,
+  },
+
   // INDIVIDUAL PROJECTS (For reference by ID)
   ...projectsData.reduce((acc, project, index) => {
     // New coordinate system for deep space view
@@ -146,6 +175,22 @@ export const content = {
 
     acc[`project-${project.id}`] = {
       ...project,
+      x: offset.x,
+      y: offset.y
+    };
+    return acc;
+  }, {}),
+
+  // INDIVIDUAL PUBLICATIONS (For reference by ID)
+  ...publicationsData.reduce((acc, pub, index) => {
+    // New coordinate system for deep space view
+    const offsets = [
+      { x: 0, y: 0 },
+    ];
+    const offset = offsets[index] || { x: 0, y: 0 };
+
+    acc[`publication-${pub.id}`] = {
+      ...pub,
       x: offset.x,
       y: offset.y
     };

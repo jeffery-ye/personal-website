@@ -11,6 +11,7 @@ const Navbar = () => {
   const navLinks = [
     { name: 'Home', path: '/' },
     { name: 'Projects', path: '/projects' },
+    { name: 'Publications', path: '/publications' },
     { name: 'About', path: '/about' },
     { name: 'Resume', path: '/resume' },
   ];
@@ -81,6 +82,9 @@ const Navbar = () => {
                       case '/projects':
                         setOrbitSystem('projects');
                         break;
+                      case '/publications':
+                        setOrbitSystem('publications');
+                        break;
                       case '/resume':
                         setOrbitSystem('home');
                         setActiveSection('resume');
@@ -125,6 +129,7 @@ const Navbar = () => {
                       case '/': setOrbitSystem('home'); setActiveSection('hero'); break;
                       case '/about': setOrbitSystem('home'); setActiveSection('about'); break;
                       case '/projects': setOrbitSystem('projects'); break;
+                      case '/publications': setOrbitSystem('publications'); break;
                       case '/resume': setOrbitSystem('home'); setActiveSection('resume'); break;
                       default: setOrbitSystem('home');
                     }

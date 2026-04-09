@@ -7,6 +7,7 @@ import ConstellationLines from './ConstellationLines';
 import ClusterNavigation from './ClusterNavigation';
 import SectionOverlay from './SectionOverlay';
 import ActiveProjectOverlay from './ActiveProjectOverlay';
+import ActivePublicationOverlay from './ActivePublicationOverlay';
 import GalaxyBackground from './GalaxyBackground';
 import { content } from '../../data/content';
 import nebulaBg from '../../assets/image_assets/nebula-bg.webp';
@@ -15,8 +16,9 @@ import blackholeImg from '../../assets/blackhole.webp';
 const GalaxyCanvas = () => {
     const orbitSystem = useStore((state) => state.orbitSystem);
     const activeProjectId = useStore((state) => state.activeProjectId);
+    const activePublicationId = useStore((state) => state.activePublicationId);
     const activeSection = useStore((state) => state.activeSection);
-    const { setActiveProject, setOrbitSystem, setActiveSection } = useStoreActions();
+    const { setActiveProject, setActivePublication, setOrbitSystem, setActiveSection } = useStoreActions();
 
     // Preload Nebula Image
     useEffect(() => {
@@ -65,6 +67,19 @@ const GalaxyCanvas = () => {
                 opacity: 0,
                 transition: { duration: 0.8, ease: "easeInOut" }
             }
+        },
+        publications: {
+            initial: { scale: 0.2, opacity: 0 },
+            animate: {
+                scale: 1,
+                opacity: 1,
+                transition: { type: "spring", duration: 1.2, bounce: 0, delay: 0.1 }
+            },
+            exit: {
+                scale: 0.2,
+                opacity: 0,
+                transition: { duration: 0.8, ease: "easeInOut" }
+            }
         }
     };
 
@@ -72,7 +87,7 @@ const GalaxyCanvas = () => {
     const maxDrag = 400;
 
     // Portal position for transform origin (Home system)
-    const portalNode = content['projects-portal'];
+    const portalNode = content[`${orbitSystem}-portal`] || content['projects-portal'];
     const transformOrigin = portalNode
         ? `calc(50% + ${portalNode.x}px) calc(50% + ${portalNode.y}px)`
         : 'center center';
@@ -86,7 +101,7 @@ const GalaxyCanvas = () => {
 
             {/* Draggable Canvas - Disable interaction when overlay is open */}
             <motion.div
-                className={`absolute cursor-grab active:cursor-grabbing ${activeSection || activeProjectId ? 'pointer-events-none' : ''}`}
+                className={`absolute cursor-grab active:cursor-grabbing ${activeSection || activeProjectId || activePublicationId ? 'pointer-events-none' : ''}`}
                 drag
                 dragConstraints={{
                     left: - maxDrag, right: maxDrag, top: -maxDrag, bottom: maxDrag
@@ -142,6 +157,8 @@ const GalaxyCanvas = () => {
                                             setOrbitSystem(node.target);
                                         } else if (node.type === 'project') {
                                             setActiveProject(node.data.id);
+                                        } else if (node.type === 'publication') {
+                                            setActivePublication(node.data.id);
                                         } else {
                                             setActiveSection(node.id);
                                         }
@@ -153,8 +170,9 @@ const GalaxyCanvas = () => {
                 </AnimatePresence>
             </motion.div>
 
-            {/* Overlay for expanded project */}
+            {/* Overlay for expanded project/publication */}
             <ActiveProjectOverlay />
+            <ActivePublicationOverlay />
         </div>
     );
 };

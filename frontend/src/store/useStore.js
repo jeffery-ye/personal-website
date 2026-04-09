@@ -7,12 +7,16 @@ export const useStore = create((set) => ({
     camera: { x: 0, y: 0, zoom: 1 }, // intended for future use
 
     activeProjectId: null, // string | null — the ID of the currently expanded project
+    activePublicationId: null, // string | null — the ID of the currently expanded publication
     activeSection: null, // string | null — 'hero' | 'about' | 'resume'
-    orbitSystem: 'home', // 'home' | 'projects'
+    orbitSystem: 'home', // 'home' | 'projects' | 'publications'
 
     actions: {
         setActiveProject: (id) => set({ activeProjectId: id }),
         clearActiveProject: () => set({ activeProjectId: null }),
+
+        setActivePublication: (id) => set({ activePublicationId: id }),
+        clearActivePublication: () => set({ activePublicationId: null }),
 
         setActiveSection: (section) => set({ activeSection: section }),
         clearActiveSection: () => set({ activeSection: null }),

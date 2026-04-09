@@ -9,6 +9,8 @@ const GalaxyNode = ({ id, label, x, y, type = 'node', onClick }) => {
                 return { variant: 'portal', size: 70 };
             case 'project':
                 return { variant: 'project', size: 40 };
+            case 'publication':
+                return { variant: 'project', size: 40 }; // reuse project style for publications
             case 'blackhole':
                 return { variant: 'blackhole', size: 100 };
             default:
