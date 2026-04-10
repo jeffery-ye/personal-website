@@ -19,7 +19,7 @@ const ProjectCard = ({ project }) => {
         {project.description}
       </p>
 
-      <div className="flex items-center justify-between mt-auto">
+      <div className="flex flex-col gap-4 mt-auto">
         <div className="flex flex-wrap gap-2">
           {project.tags.map((tag) => (
             <span key={tag} className="text-xs font-medium px-2.5 py-1 rounded-full bg-space-950 border border-space-800 text-nebula-cyan/80">
@@ -29,15 +29,17 @@ const ProjectCard = ({ project }) => {
         </div>
 
         {project.link && project.link !== '#' && (
-          <a
-            href={project.link}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-3 py-2 text-sm font-medium text-star-100 bg-space-800 border border-space-700 rounded-lg hover:bg-nebula-purple/20 hover:border-nebula-purple hover:text-white transition-all duration-300"
-          >
-            <Github size={16} />
-            View Code
-          </a>
+          <div className="flex mt-2">
+            <a
+              href={project.link}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 px-3 py-2 text-sm font-medium text-star-100 bg-space-800 border border-space-700 rounded-lg hover:bg-nebula-purple/20 hover:border-nebula-purple hover:text-white transition-all duration-300"
+            >
+              <Github size={16} />
+              View Code
+            </a>
+          </div>
         )}
       </div>
     </div>

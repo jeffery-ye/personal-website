@@ -9,6 +9,8 @@ const GalaxyNode = ({ id, label, x, y, type = 'node', onClick }) => {
                 return { variant: 'portal', size: 70 };
             case 'project':
                 return { variant: 'project', size: 40 };
+            case 'publication':
+                return { variant: 'default', size: 45, color: '#ef4444', secondaryColor: '#dc2626' }; // single star, bright red
             case 'blackhole':
                 return { variant: 'blackhole', size: 100 };
             default:
@@ -16,7 +18,7 @@ const GalaxyNode = ({ id, label, x, y, type = 'node', onClick }) => {
         }
     };
 
-    const { variant, size } = getStarConfig();
+    const { variant, size, color, secondaryColor } = getStarConfig();
 
     return (
         <div
@@ -28,19 +30,18 @@ const GalaxyNode = ({ id, label, x, y, type = 'node', onClick }) => {
             }}
         >
             <motion.div
-                layoutId={id}
                 className="cursor-pointer flex items-center justify-center"
                 whileHover={{ scale: 1.15 }}
                 whileTap={{ scale: 0.9 }}
                 onClick={onClick}
                 transition={{ type: "spring", stiffness: 400, damping: 25 }}
             >
-                <StarIcon variant={variant} size={size} />
+                <StarIcon variant={variant} size={size} color={color} secondaryColor={secondaryColor} />
             </motion.div>
 
             {/* Label - Always visible beneath star */}
             <div
-                className="absolute top-full left-1/2 mt-3 px-2 py-1 bg-space-900/90 rounded text-xs text-star-100 whitespace-nowrap drop-shadow-lg pointer-events-none border border-space-700/50"
+                className="absolute top-full left-1/2 mt-3 px-2 py-1 bg-space-900/90 rounded text-xs text-star-100 w-max max-w-[28ch] whitespace-normal text-center leading-tight drop-shadow-lg pointer-events-none border border-space-700/50"
                 style={{ transform: 'translateX(-50%) translateZ(0)', willChange: 'transform' }}
             >
                 {label}

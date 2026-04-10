@@ -3,6 +3,7 @@ import ViewManager from './components/ViewManager';
 import { useHardwareCheck } from './hooks/useHardwareCheck';
 import Home from './pages/Home';
 import Projects from './pages/Projects';
+import Publications from './pages/Publications';
 import About from './pages/About';
 import Resume from './pages/Resume';
 
@@ -17,6 +18,7 @@ function App() {
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/projects" element={<Projects />} />
+              <Route path="/publications" element={<Publications />} />
               <Route path="/about" element={<About />} />
               <Route path="/resume" element={<Resume />} />
             </Routes>
