@@ -30,7 +30,6 @@ const GalaxyNode = ({ id, label, x, y, type = 'node', onClick }) => {
             }}
         >
             <motion.div
-                layoutId={id}
                 className="cursor-pointer flex items-center justify-center"
                 whileHover={{ scale: 1.15 }}
                 whileTap={{ scale: 0.9 }}

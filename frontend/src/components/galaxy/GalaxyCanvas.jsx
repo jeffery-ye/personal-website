@@ -44,13 +44,19 @@ const GalaxyCanvas = () => {
                 scale: 1,
                 opacity: 1,
                 transformOrigin: ctx.homeOrigin,
-                transition: { type: "spring", duration: 1.2, bounce: 0, delay: 0.1 }
+                transition: {
+                    type: "spring", duration: 1.2, bounce: 0, delay: 0.1,
+                    transformOrigin: { duration: 0 }
+                }
             }),
             exit: (ctx) => ({
                 scale: 5,
                 opacity: 0,
                 transformOrigin: ctx.homeOrigin,
-                transition: { duration: 0.8, ease: "easeInOut" }
+                transition: {
+                    duration: 0.8, ease: "easeInOut",
+                    transformOrigin: { duration: 0 }
+                }
             })
         },
         projects: {
@@ -59,13 +65,19 @@ const GalaxyCanvas = () => {
                 scale: 1,
                 opacity: 1,
                 transformOrigin: ctx.origins.projects,
-                transition: { type: "spring", duration: 1.2, bounce: 0, delay: 0.1 }
+                transition: {
+                    type: "spring", duration: 1.2, bounce: 0, delay: 0.1,
+                    transformOrigin: { duration: 0 }
+                }
             }),
             exit: (ctx) => ({
                 scale: 0.2,
                 opacity: 0,
                 transformOrigin: ctx.origins.projects,
-                transition: { duration: 0.8, ease: "easeInOut" }
+                transition: {
+                    duration: 0.8, ease: "easeInOut",
+                    transformOrigin: { duration: 0 }
+                }
             })
         },
         publications: {
@@ -74,13 +86,19 @@ const GalaxyCanvas = () => {
                 scale: 1,
                 opacity: 1,
                 transformOrigin: ctx.origins.publications,
-                transition: { type: "spring", duration: 1.2, bounce: 0, delay: 0.1 }
+                transition: {
+                    type: "spring", duration: 1.2, bounce: 0, delay: 0.1,
+                    transformOrigin: { duration: 0 }
+                }
             }),
             exit: (ctx) => ({
                 scale: 0.2,
                 opacity: 0,
                 transformOrigin: ctx.origins.publications,
-                transition: { duration: 0.8, ease: "easeInOut" }
+                transition: {
+                    duration: 0.8, ease: "easeInOut",
+                    transformOrigin: { duration: 0 }
+                }
             })
         }
     };
@@ -147,7 +165,7 @@ const GalaxyCanvas = () => {
                         {/* Nebula Background - Attached to System Space */}
                         {orbitSystem === 'projects' && (
                             <div
-                                className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[150%] h-[150%] -z-10 opacity-80 pointer-events-none"
+                                className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[150%] h-[150%] opacity-80 pointer-events-none"
                                 style={{
                                     backgroundImage: `url(${nebulaBg})`,
                                     backgroundSize: 'contain',

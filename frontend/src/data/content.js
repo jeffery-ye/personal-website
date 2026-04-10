@@ -21,7 +21,7 @@ const projectsData = [
     id: 3,
     title: "Musicalendar",
     description: "A full-stack many-to-one scheduling app, with automated optimized scheduling powered by a custom max-flow algorithm",
-    tags: ["Web Dev", "Full-Stack", "PostgreSQL", "ReactJS", "Group Project"],
+    tags: ["Full-Stack", "Postgres", "React", "Group Project"],
     link: "https://github.com/nicholasz2510/lesson-scheduler",
     icon: Calendar1
   },
