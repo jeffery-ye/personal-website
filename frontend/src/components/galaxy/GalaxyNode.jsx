@@ -41,7 +41,7 @@ const GalaxyNode = ({ id, label, x, y, type = 'node', onClick }) => {
 
             {/* Label - Always visible beneath star */}
             <div
-                className="absolute top-full left-1/2 mt-3 px-2 py-1 bg-space-900/90 rounded text-xs text-star-100 whitespace-nowrap drop-shadow-lg pointer-events-none border border-space-700/50"
+                className="absolute top-full left-1/2 mt-3 px-2 py-1 bg-space-900/90 rounded text-xs text-star-100 w-max max-w-[28ch] whitespace-normal text-center leading-tight drop-shadow-lg pointer-events-none border border-space-700/50"
                 style={{ transform: 'translateX(-50%) translateZ(0)', willChange: 'transform' }}
             >
                 {label}

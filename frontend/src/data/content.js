@@ -6,7 +6,7 @@ const projectsData = [
     title: "AI Protein Purification Agent",
     description: "An agentic workflow to create and optimize protein purification protocols, reducing manual experimental design time by over 95%.",
     tags: ["AI Agents", "Full-Stack", "Python", "Work"],
-    link: "#",
+    link: "https://github.com/jeffery-ye/agentic-protein-purification",
     icon: FlaskConical
   },
   {
@@ -67,7 +67,7 @@ const publicationsData = [
     authors: ["Jeffery Ye", "Amy DeRocher", "Monique Khim", "Sandhya Subramanian", "Lisabeth Cron", "Peter J. Myler", "Isabelle Q. Phan"],
     venue: "bioRxiv",
     year: 2026,
-    abstract: "An agentic workflow to create and optimize protein purification protocols, reducing manual experimental design time by over 95%.",
+    abstract: "This paper describes the design and development of an agentic workflow to create and optimize protein purification protocols. It involves an LLM-based literature search/protocol extraction engine, multiple bioinformatics tools, and a multi-agent optimization loop that iteratively refines protocols. This approach reduces manual experimental design time by over 95%.",
     tags: ["AI Agents", "Python", "Work"],
     arxiv: "https://www.biorxiv.org/content/10.64898/2026.03.03.709341v1",
     icon: FileText
@@ -134,7 +134,7 @@ export const content = {
   about: {
     id: 'about',
     label: "About Me",
-    intro: "I'm a graduating senior at the University of Washington, specializing in Software and AI. Currently, I work as a Software Research Assistant at Seattle Children's, where I build autonomous AI agents to accelerate research workflows. I'm also a teaching assistant at the Information School, where I introduce students to concepts like Machine Learning, Large Language Models, and AI Ethics.",
+    intro: "I'm a graduating senior at the University of Washington, specializing in Software and AI. Currently, I work as a Software Research Assistant at Seattle Children's, where I build autonomous AI agents to accelerate research workflows. I'm also a teaching assistant at the Information School, where I teach students about concepts like Large Language Models, AI Ethics, Machine Learning.",
 
     bio: [
       "Hi, I'm Jeffery, a senior Informatics student at the University of Washington. I'm a software research assistant at Seattle Children's Research Institute, where I get to combine my passions for AI/NLP with fascinating (and terrifying) infectious diseases. I've created complex agentic workflows, worked on full-stack web applications, and written a research paper there. I'm also a teaching assistant for the Information School, where I help instruct students on the foundations of Informatics. We discuss concepts at the intersection between technology and society, and I've enjoyed teaching classes on topics like LLMs, algorithmic bias, cybersecurity, data science, etc.",
