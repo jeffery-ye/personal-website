@@ -5,7 +5,7 @@ import GradientText from '../components/GradientText'
 const Resume = () => {
   return (
     <div className="pt-2 pb-10 h-[calc(100vh-64px)] flex flex-col items-center">
-      <div className="text-center space-y-6 mb-8 px-">
+      <div className="text-center space-y-6 mb-8 px-4">
         <div className="text-white pt-10">
               <GradientText
                 colors={["#26efff","#921aff","#fa2bff"]}
@@ -40,11 +40,10 @@ const Resume = () => {
         </div>
       </div>
 
-      <div className="w-full max-w-5xl flex-1 bg-space-900/50 rounded-xl border border-space-800 overflow-hidden shadow-2xl backdrop-blur-sm mx-4">
-
+      <div className="w-full max-w-4xl flex-1 bg-space-950 rounded-xl border-0 overflow-hidden shadow-2xl mx-4">
         <iframe 
-          src={`${resumePdf}#toolbar=0`} 
-          className="w-full h-full"
+          src={`${resumePdf}#toolbar=0&navpanes=0&scrollbar=0&view=FitH`} 
+          className="w-full h-full border-0"
           title="Resume PDF"
           style={{ filter: 'invert(0.92) hue-rotate(180deg) contrast(1.2)' }}
         />

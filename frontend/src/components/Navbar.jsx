@@ -41,7 +41,7 @@ const Navbar = () => {
 
           {/* View Mode Toggle - Absolute Center */}
           {!isMobile && (
-            <div className="hidden md:flex absolute left-1/2 -translate-x-1/2">
+            <div className="hidden xl:flex absolute left-1/2 -translate-x-1/2">
               <button
                 onClick={toggleViewMode}
                 className="flex items-center gap-2 px-4 py-2 rounded-full border-2 border-nebula-purple/50 text-star-100 font-medium hover:bg-nebula-purple/10 hover:border-nebula-purple hover:text-white transition-all duration-300"
@@ -55,7 +55,7 @@ const Navbar = () => {
           )}
 
           {/* Desktop Menu - Right Side */}
-          <div className="hidden md:flex items-center space-x-4">
+          <div className="hidden xl:flex items-center space-x-4">
             {navLinks.map((link) => (
               <Link
                 key={link.name}
@@ -101,7 +101,7 @@ const Navbar = () => {
           </div>
 
           {/* Mobile Menu Button */}
-          <div className="-mr-2 flex md:hidden">
+          <div className="-mr-2 flex xl:hidden">
             <button
               onClick={() => setIsOpen(!isOpen)}
               className="inline-flex items-center justify-center p-2 rounded-md text-star-400 hover:text-white hover:bg-space-800 focus:outline-none"
@@ -114,7 +114,7 @@ const Navbar = () => {
 
       {/* Mobile Menu Dropdown */}
       {isOpen && (
-        <div className="md:hidden bg-space-950 border-b border-space-800">
+        <div className="xl:hidden bg-space-950 border-b border-space-800">
           <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
             {navLinks.map((link) => (
               <Link

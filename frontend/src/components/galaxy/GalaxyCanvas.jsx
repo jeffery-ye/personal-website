@@ -144,7 +144,7 @@ const GalaxyCanvas = () => {
                     left: - maxDrag, right: maxDrag, top: -maxDrag, bottom: maxDrag
                 }}
                 dragElastic={0.1}
-                style={{ width: '200%', height: '200%', left: '-50%', top: '-50%' }}
+                style={{ width: '300%', height: '300%', left: '-100%', top: '-100%' }}
             >
                 <AnimatePresence mode="wait" custom={animationContext}>
                     <motion.div

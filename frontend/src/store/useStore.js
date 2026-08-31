@@ -2,7 +2,7 @@ import { create } from 'zustand';
 
 export const useStore = create((set) => ({
     viewMode: 'galaxy', // 'list' | 'galaxy'
-    isMobile: false, // defined as width < 768px
+    isMobile: false, // defined as width < 1280px
     prefersReducedMotion: false, // defined by media query
     camera: { x: 0, y: 0, zoom: 1 }, // intended for future use
 
