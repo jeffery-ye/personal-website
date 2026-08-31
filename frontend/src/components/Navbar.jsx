@@ -1,10 +1,12 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Menu, X, Telescope, List } from 'lucide-react';
-import { useStore } from '../store/useStore';
+import { useStore, useStoreActions } from '../store/useStore';
 
 const Navbar = () => {
-  const { viewMode, isMobile, actions: { toggleViewMode } } = useStore();
+  const viewMode = useStore((state) => state.viewMode);
+  const isMobile = useStore((state) => state.isMobile);
+  const { toggleViewMode } = useStoreActions();
   const [isOpen, setIsOpen] = useState(false);
   const location = useLocation();
 
@@ -18,6 +20,17 @@ const Navbar = () => {
 
   const isActive = (path) => location.pathname === path;
 
+  // Close mobile menu on Escape key
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === 'Escape' && isOpen) {
+        setIsOpen(false);
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [isOpen]);
+
   return (
     <nav className="bg-space-950/80 backdrop-blur-md border-b border-space-800 sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -26,14 +39,7 @@ const Navbar = () => {
           <Link
             to="/"
             className="flex items-center space-x-2 text-nebula-purple hover:text-nebula-cyan transition-colors"
-            onClick={(e) => {
-              if (viewMode === 'galaxy') {
-                e.preventDefault();
-                const { setOrbitSystem, setActiveSection } = useStore.getState().actions;
-                setOrbitSystem('home');
-                setActiveSection('hero');
-              }
-            }}
+            aria-label="Jeffery Ye Home"
           >
             <Telescope size={28} />
             <span className="font-bold text-xl tracking-tight text-star-100">Jeffery Ye</span>
@@ -44,7 +50,8 @@ const Navbar = () => {
             <div className="hidden xl:flex absolute left-1/2 -translate-x-1/2">
               <button
                 onClick={toggleViewMode}
-                className="flex items-center gap-2 px-4 py-2 rounded-full border-2 border-nebula-purple/50 text-star-100 font-medium hover:bg-nebula-purple/10 hover:border-nebula-purple hover:text-white transition-all duration-300"
+                aria-label={`Switch to ${viewMode === 'galaxy' ? 'Normal View' : 'Constellation View'}`}
+                className="flex items-center gap-2 px-4 py-2 rounded-full border-2 border-nebula-purple/50 text-star-100 font-medium hover:bg-nebula-purple/10 hover:border-nebula-purple hover:text-white transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-nebula-cyan"
               >
                 {viewMode === 'galaxy' ? <List size={18} /> : <Telescope size={18} />}
                 <span className="text-sm">
@@ -64,36 +71,6 @@ const Navbar = () => {
                   ? 'bg-space-800 text-nebula-purple'
                   : 'text-star-400 hover:text-nebula-cyan hover:bg-space-900'
                   }`}
-                onClick={(e) => {
-                  if (viewMode === 'galaxy') {
-                    e.preventDefault();
-                    const { setOrbitSystem, setActiveSection } = useStore.getState().actions;
-
-                    // Map paths to systems/nodes
-                    switch (link.path) {
-                      case '/':
-                        setOrbitSystem('home');
-                        setActiveSection('hero');
-                        break;
-                      case '/about':
-                        setOrbitSystem('home');
-                        setActiveSection('about');
-                        break;
-                      case '/projects':
-                        setOrbitSystem('projects');
-                        break;
-                      case '/publications':
-                        setOrbitSystem('publications');
-                        break;
-                      case '/resume':
-                        setOrbitSystem('home');
-                        setActiveSection('resume');
-                        break;
-                      default:
-                        setOrbitSystem('home');
-                    }
-                  }
-                }}
               >
                 {link.name}
               </Link>
@@ -104,7 +81,10 @@ const Navbar = () => {
           <div className="-mr-2 flex xl:hidden">
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="inline-flex items-center justify-center p-2 rounded-md text-star-400 hover:text-white hover:bg-space-800 focus:outline-none"
+              aria-label="Toggle navigation menu"
+              aria-expanded={isOpen}
+              aria-controls="mobile-menu"
+              className="inline-flex items-center justify-center p-2 rounded-md text-star-400 hover:text-white hover:bg-space-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-nebula-cyan"
             >
               {isOpen ? <X size={24} /> : <Menu size={24} />}
             </button>
@@ -114,27 +94,13 @@ const Navbar = () => {
 
       {/* Mobile Menu Dropdown */}
       {isOpen && (
-        <div className="xl:hidden bg-space-950 border-b border-space-800">
+        <div id="mobile-menu" className="xl:hidden bg-space-950 border-b border-space-800">
           <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
             {navLinks.map((link) => (
               <Link
                 key={link.name}
                 to={link.path}
-                onClick={(e) => {
-                  setIsOpen(false);
-                  if (viewMode === 'galaxy') {
-                    e.preventDefault();
-                    const { setOrbitSystem, setActiveSection } = useStore.getState().actions;
-                    switch (link.path) {
-                      case '/': setOrbitSystem('home'); setActiveSection('hero'); break;
-                      case '/about': setOrbitSystem('home'); setActiveSection('about'); break;
-                      case '/projects': setOrbitSystem('projects'); break;
-                      case '/publications': setOrbitSystem('publications'); break;
-                      case '/resume': setOrbitSystem('home'); setActiveSection('resume'); break;
-                      default: setOrbitSystem('home');
-                    }
-                  }
-                }}
+                onClick={() => setIsOpen(false)}
                 className={`block px-3 py-2 rounded-md text-base font-medium transition-colors ${isActive(link.path)
                   ? 'bg-space-800 text-nebula-cyan'
                   : 'text-star-400 hover:text-nebula-purple hover:bg-space-900'

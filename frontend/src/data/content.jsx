@@ -63,7 +63,7 @@ const projectsData = [
 const publicationsData = [
   {
     id: 1,
-    title: "AI Agents for protein purification",
+    title: "AI Agents for Protein Purification",
     authors: ["Jeffery Ye", "Amy DeRocher", "Monique Khim", "Sandhya Subramanian", "Lisabeth Cron", "Peter J. Myler", "Isabelle Q. Phan"],
     venue: "bioRxiv",
     year: 2026,
@@ -150,8 +150,8 @@ export const content = {
     ),
 
     bio: [
-      "I'm Jeffery, a software/AI engineer and recent graduate of the University of Washington. I'm an AI engineer with the U.S. Department of the Treasury as a fellow through the U.S Tech Force. I'm developing full-stack enterprise applications on large scales, and learning to work directly with clients across diverse technical and non-technical backgrounds. My previous experience includes being a software research assistant at Seattle Children's Hospital, where I combined my passions for AI/NLP with fascinating (and terrifying) infectious diseases. I was also a teaching assistant for the Information School, where I helped instruct students at the intersection between technology and society, with deep dives into topics like LLMs, algorithmic bias, cybersecurity, ML, etc.",
-      "Outside of work, I can often be found rock climbing (cliché, I know). I mostly do indoor bouldering, but have been known to climb outdoors on occasion. I'm also a big fan of sci-fi, no matter if its through books, movies, TV shows, or video games. I've always been fascinated by space, astronomy, speculative exobiology, and more—hence the overly star themed website.",
+      "I'm Jeffery, a software/AI engineer and recent graduate of the University of Washington. I'm an AI engineer with the U.S. Department of the Treasury through the U.S Tech Force program. There, I build full-stack enterprise applications at scale and collaborate directly with cross-functional stakeholders coming from diverse fields and backgrounds. My previous experience includes being a software research assistant at Seattle Children's Hospital, where I combined my passions for AI/NLP with fascinating (and terrifying) infectious diseases. I was also a teaching assistant for the Information School for two years, where I helped instruct students at the intersection of tech and society, with deep dives into topics like LLMs, algorithmic bias, cybersecurity, and data science.",
+      "Outside of work, I can often be found rock climbing (cliché, I know). I mostly do indoor bouldering, but have been known to climb outdoors on occasion. I'm also a big fan of sci-fi, whether through books, movies, TV shows, or games. I've always been fascinated by space, astronomy, speculative exobiology, and more—hence the overly star themed website.",
     ],
     x: 300,
     y: -170,

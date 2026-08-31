@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
 import StarIcon from './StarIcon';
 
-const GalaxyNode = ({ id, label, x, y, type = 'node', onClick }) => {
+const GalaxyNode = ({ label, x, y, type = 'node', onClick }) => {
     // Map node types to StarIcon variants and sizes
     const getStarConfig = () => {
         switch (type) {
@@ -31,10 +31,19 @@ const GalaxyNode = ({ id, label, x, y, type = 'node', onClick }) => {
             }}
         >
             <motion.div
-                className="cursor-pointer flex items-center justify-center"
+                role="button"
+                tabIndex={0}
+                aria-label={label}
+                className="cursor-pointer flex items-center justify-center rounded-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-nebula-cyan focus-visible:ring-offset-2 focus-visible:ring-offset-space-950"
                 whileHover={{ scale: 1.15 }}
                 whileTap={{ scale: 0.9 }}
                 onClick={onClick}
+                onKeyDown={(e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        onClick?.();
+                    }
+                }}
                 transition={{ type: "spring", stiffness: 400, damping: 25 }}
             >
                 <StarIcon variant={variant} size={size} color={color} secondaryColor={secondaryColor} />

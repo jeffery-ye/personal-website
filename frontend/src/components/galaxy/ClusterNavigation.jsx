@@ -1,10 +1,12 @@
 import { motion } from 'framer-motion';
+import { useNavigate } from 'react-router-dom';
 import { ArrowLeft } from 'lucide-react';
 import { useStore, useStoreActions } from '../../store/useStore';
 
 const ClusterNavigation = () => {
     const orbitSystem = useStore((state) => state.orbitSystem);
     const { setOrbitSystem } = useStoreActions();
+    const navigate = useNavigate();
 
     if (orbitSystem === 'home') return null;
 
@@ -16,9 +18,12 @@ const ClusterNavigation = () => {
             className="fixed top-20 left-8 z-50"
         >
             <button
-                onClick={() => setOrbitSystem('home')}
-                className="flex items-center gap-3 group text-nebula-cyan hover:text-white transition-colors"
-                aria-label="Return to Galaxy"
+                onClick={() => {
+                    setOrbitSystem('home');
+                    navigate('/');
+                }}
+                className="flex items-center gap-3 group text-nebula-cyan hover:text-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-nebula-cyan rounded-full"
+                aria-label="Return to Galaxy Home"
             >
                 <div className="p-3 rounded-full bg-space-900 border border-space-700 group-hover:border-nebula-cyan transition-colors">
                     <ArrowLeft size={24} />

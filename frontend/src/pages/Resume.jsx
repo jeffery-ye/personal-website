@@ -46,7 +46,19 @@ const Resume = () => {
           className="w-full h-full border-0"
           title="Resume PDF"
           style={{ filter: 'invert(0.92) hue-rotate(180deg) contrast(1.2)' }}
-        />
+        >
+          <div className="flex flex-col items-center justify-center p-8 text-center text-star-400">
+            <p className="mb-4">Your browser does not support inline PDF viewing.</p>
+            <a
+              href={resumePdf}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-4 py-2 bg-nebula-cyan text-space-950 font-bold rounded-lg"
+            >
+              Open PDF Directly
+            </a>
+          </div>
+        </iframe>
       </div>
 
     </div>

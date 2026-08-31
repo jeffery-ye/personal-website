@@ -15,10 +15,12 @@ export default {
           950: '#000000', // Deepest black-blue (Main background)
           900: '#0B0F19', // Slightly lighter (Card backgrounds)
           800: '#151B2E', // Borders/Separators
+          700: '#1E2640', // Muted card borders
         },
 
         star: {
           100: '#F1F5F9', // Primary Text (Bright white-blue)
+          300: '#CBD5E1', // Mid-tone Text
           400: '#94A3B8', // Secondary Text (Muted gray-blue)
         },
 

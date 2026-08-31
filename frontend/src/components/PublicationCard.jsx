@@ -4,13 +4,14 @@ const PublicationCard = ({ publication }) => {
   const Icon = publication.icon || FileText;
 
   // Assuming user is Jeffery Ye
-  const renderAuthors = (authors) => {
-    return authors.map((author, index) => {
+  const renderAuthors = (authors = []) => {
+    const safeAuthors = Array.isArray(authors) ? authors : [];
+    return safeAuthors.map((author, index) => {
       const isJeffery = author === "Jeffery Ye";
       return (
         <span key={index}>
           {isJeffery ? <span className="font-bold text-white">{author}</span> : author}
-          {index < authors.length - 1 ? ", " : ""}
+          {index < safeAuthors.length - 1 ? ", " : ""}
         </span>
       );
     });

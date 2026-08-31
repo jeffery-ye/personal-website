@@ -1,5 +1,5 @@
 import PublicationCard from '../components/PublicationCard';
-import { content } from '../data/content';
+import { content } from '../data/content.jsx';
 import GradientText from '../components/GradientText';
 
 const Publications = () => {
