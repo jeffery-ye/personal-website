@@ -45,7 +45,7 @@ const GalaxyCanvas = () => {
                 opacity: 1,
                 transformOrigin: ctx.homeOrigin,
                 transition: {
-                    type: "spring", duration: 1.2, bounce: 0, delay: 0.1,
+                    type: "spring", duration: 1.2, bounce: 0,
                     transformOrigin: { duration: 0 }
                 }
             }),
@@ -54,7 +54,7 @@ const GalaxyCanvas = () => {
                 opacity: 0,
                 transformOrigin: ctx.homeOrigin,
                 transition: {
-                    duration: 0.8, ease: "easeInOut",
+                    duration: 0.35, ease: "easeOut",
                     transformOrigin: { duration: 0 }
                 }
             })
@@ -66,7 +66,7 @@ const GalaxyCanvas = () => {
                 opacity: 1,
                 transformOrigin: ctx.origins.projects,
                 transition: {
-                    type: "spring", duration: 1.2, bounce: 0, delay: 0.1,
+                    type: "spring", duration: 1.2, bounce: 0,
                     transformOrigin: { duration: 0 }
                 }
             }),
@@ -75,7 +75,7 @@ const GalaxyCanvas = () => {
                 opacity: 0,
                 transformOrigin: ctx.origins.projects,
                 transition: {
-                    duration: 0.8, ease: "easeInOut",
+                    duration: 0.35, ease: "easeOut",
                     transformOrigin: { duration: 0 }
                 }
             })
@@ -87,7 +87,7 @@ const GalaxyCanvas = () => {
                 opacity: 1,
                 transformOrigin: ctx.origins.publications,
                 transition: {
-                    type: "spring", duration: 1.2, bounce: 0, delay: 0.1,
+                    type: "spring", duration: 1.2, bounce: 0,
                     transformOrigin: { duration: 0 }
                 }
             }),
@@ -96,7 +96,7 @@ const GalaxyCanvas = () => {
                 opacity: 0,
                 transformOrigin: ctx.origins.publications,
                 transition: {
-                    duration: 0.8, ease: "easeInOut",
+                    duration: 0.35, ease: "easeOut",
                     transformOrigin: { duration: 0 }
                 }
             })
@@ -210,6 +210,12 @@ const GalaxyCanvas = () => {
             {/* Overlay for expanded project/publication */}
             <ActiveProjectOverlay />
             <ActivePublicationOverlay />
+
+            {/* Preload and pre-warm assets & screen graphics for instant transitions */}
+            <div className="fixed -top-[9999px] -left-[9999px] opacity-0 pointer-events-none w-1 h-1 overflow-hidden" aria-hidden="true">
+                <img src={nebulaBg} alt="" decoding="async" />
+                <img src={blackholeImg} alt="" decoding="async" />
+            </div>
         </div>
     );
 };

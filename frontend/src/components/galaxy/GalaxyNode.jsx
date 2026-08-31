@@ -19,6 +19,7 @@ const GalaxyNode = ({ id, label, x, y, type = 'node', onClick }) => {
     };
 
     const { variant, size, color, secondaryColor } = getStarConfig();
+    const isPublication = type === 'publication';
 
     return (
         <div
@@ -41,7 +42,11 @@ const GalaxyNode = ({ id, label, x, y, type = 'node', onClick }) => {
 
             {/* Label - Always visible beneath star */}
             <div
-                className="absolute top-full left-1/2 mt-3 px-2 py-1 bg-space-900/90 rounded text-xs text-star-100 w-max max-w-[28ch] whitespace-normal text-center leading-tight drop-shadow-lg pointer-events-none border border-space-700/50"
+                className={`absolute top-full left-1/2 mt-2 px-2 py-0.5 bg-space-950 rounded-none font-mono text-star-100 w-max whitespace-normal text-center leading-tight pointer-events-none border-2 border-nebula-cyan shadow-[3px_3px_0px_0px_#083344] ${
+                    isPublication
+                        ? 'max-w-[38ch] text-[10px]'
+                        : 'max-w-[16ch] text-[10px]'
+                }`}
                 style={{ transform: 'translateX(-50%) translateZ(0)', willChange: 'transform' }}
             >
                 {label}
