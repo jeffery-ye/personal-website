@@ -1,8 +1,8 @@
 # Jeffery Ye - Personal Portfolio
 
-[jeffery.wiki](https://www.jeffery.wiki)
+[jeffye.com](https://www.jeffye.com)
 
-Welcome! This is a personal portfolio website built to showcase Software and AI Engineering projects. This site features a cool space theme, interactive animations, and a centralized content management system.
+GREETINGS! This is a personal portfolio website built to showcase Software and AI Engineering projects. This site features a cool space theme, interactive animations, and a centralized content management system.
 
 ## Built With
 
