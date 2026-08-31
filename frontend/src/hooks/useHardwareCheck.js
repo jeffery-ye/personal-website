@@ -8,7 +8,7 @@ export const useHardwareCheck = () => {
         let timeoutId;
 
         const checkCapabilities = () => {
-            const isMobile = window.innerWidth < 768;
+            const isMobile = window.innerWidth < 1280;
             const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
             setDeviceCapabilities(isMobile, prefersReducedMotion);
@@ -20,7 +20,7 @@ export const useHardwareCheck = () => {
         };
 
         const handleMotionChange = (e) => {
-            const isMobile = window.innerWidth < 768;
+            const isMobile = window.innerWidth < 1280;
             setDeviceCapabilities(isMobile, e.matches);
         };
 

@@ -1,4 +1,5 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useStore, useStoreActions } from '../../store/useStore';
 
@@ -9,16 +10,18 @@ import SectionOverlay from './SectionOverlay';
 import ActiveProjectOverlay from './ActiveProjectOverlay';
 import ActivePublicationOverlay from './ActivePublicationOverlay';
 import GalaxyBackground from './GalaxyBackground';
-import { content } from '../../data/content';
+import { content } from '../../data/content.jsx';
 import nebulaBg from '../../assets/image_assets/nebula-bg.webp';
 import blackholeImg from '../../assets/blackhole.webp';
 
 const GalaxyCanvas = () => {
+    const navigate = useNavigate();
     const orbitSystem = useStore((state) => state.orbitSystem);
     const activeProjectId = useStore((state) => state.activeProjectId);
     const activePublicationId = useStore((state) => state.activePublicationId);
     const activeSection = useStore((state) => state.activeSection);
     const { setActiveProject, setActivePublication, setOrbitSystem, setActiveSection } = useStoreActions();
+    const [lastSubSystem, setLastSubSystem] = useState('projects');
 
     // Preload Nebula Image
     useEffect(() => {
@@ -28,14 +31,14 @@ const GalaxyCanvas = () => {
             img.src = src;
             try {
                 await img.decode();
-            } catch (e) {
+            } catch {
                 console.warn("Failed to decode image", src);
             }
         });
     }, []);
 
-    // Get current system data
-    const currentSystem = content.systems[orbitSystem];
+    // Get current system data with fallback to home
+    const currentSystem = content.systems[orbitSystem] || content.systems.home;
 
     const variants = {
         home: {
@@ -45,7 +48,7 @@ const GalaxyCanvas = () => {
                 opacity: 1,
                 transformOrigin: ctx.homeOrigin,
                 transition: {
-                    type: "spring", duration: 1.2, bounce: 0, delay: 0.1,
+                    type: "spring", duration: 1.2, bounce: 0,
                     transformOrigin: { duration: 0 }
                 }
             }),
@@ -54,7 +57,7 @@ const GalaxyCanvas = () => {
                 opacity: 0,
                 transformOrigin: ctx.homeOrigin,
                 transition: {
-                    duration: 0.8, ease: "easeInOut",
+                    duration: 0.35, ease: "easeOut",
                     transformOrigin: { duration: 0 }
                 }
             })
@@ -66,7 +69,7 @@ const GalaxyCanvas = () => {
                 opacity: 1,
                 transformOrigin: ctx.origins.projects,
                 transition: {
-                    type: "spring", duration: 1.2, bounce: 0, delay: 0.1,
+                    type: "spring", duration: 1.2, bounce: 0,
                     transformOrigin: { duration: 0 }
                 }
             }),
@@ -75,7 +78,7 @@ const GalaxyCanvas = () => {
                 opacity: 0,
                 transformOrigin: ctx.origins.projects,
                 transition: {
-                    duration: 0.8, ease: "easeInOut",
+                    duration: 0.35, ease: "easeOut",
                     transformOrigin: { duration: 0 }
                 }
             })
@@ -87,7 +90,7 @@ const GalaxyCanvas = () => {
                 opacity: 1,
                 transformOrigin: ctx.origins.publications,
                 transition: {
-                    type: "spring", duration: 1.2, bounce: 0, delay: 0.1,
+                    type: "spring", duration: 1.2, bounce: 0,
                     transformOrigin: { duration: 0 }
                 }
             }),
@@ -96,7 +99,7 @@ const GalaxyCanvas = () => {
                 opacity: 0,
                 transformOrigin: ctx.origins.publications,
                 transition: {
-                    duration: 0.8, ease: "easeInOut",
+                    duration: 0.35, ease: "easeOut",
                     transformOrigin: { duration: 0 }
                 }
             })
@@ -117,12 +120,16 @@ const GalaxyCanvas = () => {
         publications: getOrigin('publications')
     };
 
-    // To tell 'home' where to zoom to/from, we track the 'active' sub-system.
-    const lastSubSystemRef = useRef('projects');
-    if (orbitSystem !== 'home') {
-        lastSubSystemRef.current = orbitSystem;
+    // To tell 'home' where to zoom to/from, adjust lastSubSystem when orbit changes
+    const [prevOrbitSystem, setPrevOrbitSystem] = useState(orbitSystem);
+    if (orbitSystem !== prevOrbitSystem) {
+        setPrevOrbitSystem(orbitSystem);
+        if (orbitSystem !== 'home') {
+            setLastSubSystem(orbitSystem);
+        }
     }
-    const homeOrigin = origins[orbitSystem !== 'home' ? orbitSystem : lastSubSystemRef.current];
+
+    const homeOrigin = origins[orbitSystem !== 'home' ? orbitSystem : lastSubSystem];
 
     const animationContext = {
         origins,
@@ -144,13 +151,13 @@ const GalaxyCanvas = () => {
                     left: - maxDrag, right: maxDrag, top: -maxDrag, bottom: maxDrag
                 }}
                 dragElastic={0.1}
-                style={{ width: '200%', height: '200%', left: '-50%', top: '-50%' }}
+                style={{ width: '300%', height: '300%', left: '-100%', top: '-100%' }}
             >
                 <AnimatePresence mode="wait" custom={animationContext}>
                     <motion.div
                         key={orbitSystem}
                         custom={animationContext}
-                        variants={variants[orbitSystem]} // Use specific variants for the current system
+                        variants={variants[orbitSystem] || variants.home} // Use specific variants for the current system
                         initial="initial"
                         animate="animate"
                         exit="exit"
@@ -188,16 +195,20 @@ const GalaxyCanvas = () => {
                                     x={nodeData.x}
                                     y={nodeData.y}
                                     type={node.type}
-                                    // Portal Handling
+                                    // Node & Portal Interaction
                                     onClick={() => {
                                         if (node.type === 'portal') {
                                             setOrbitSystem(node.target);
+                                            navigate(`/${node.target}`);
                                         } else if (node.type === 'project') {
-                                            setActiveProject(node.data.id);
+                                            setActiveProject(node.data?.id || node.id);
                                         } else if (node.type === 'publication') {
-                                            setActivePublication(node.data.id);
+                                            setActivePublication(node.data?.id || node.id);
                                         } else {
                                             setActiveSection(node.id);
+                                            if (node.id === 'about' || node.id === 'resume') {
+                                                navigate(`/${node.id}`);
+                                            }
                                         }
                                     }}
                                 />
@@ -210,6 +221,12 @@ const GalaxyCanvas = () => {
             {/* Overlay for expanded project/publication */}
             <ActiveProjectOverlay />
             <ActivePublicationOverlay />
+
+            {/* Preload and pre-warm assets & screen graphics for instant transitions */}
+            <div className="fixed -top-[9999px] -left-[9999px] opacity-0 pointer-events-none w-1 h-1 overflow-hidden" aria-hidden="true">
+                <img src={nebulaBg} alt="" decoding="async" />
+                <img src={blackholeImg} alt="" decoding="async" />
+            </div>
         </div>
     );
 };

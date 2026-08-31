@@ -1,5 +1,5 @@
 import { Mail, Linkedin, ArrowRight } from 'lucide-react';
-import { content } from '../data/content';
+import { content } from '../data/content.jsx';
 import GradientText from '../components/GradientText';
 
 const About = () => {
@@ -17,7 +17,7 @@ const About = () => {
       </GradientText>
 
       <div className="space-y-8 text-lg text-star-400 leading-loose font-sans">
-        {content.about.bio.map((paragraph, index) => (
+        {(content?.about?.bio ?? []).map((paragraph, index) => (
           <p key={index} className="drop-shadow-lg">
             {paragraph}
           </p>

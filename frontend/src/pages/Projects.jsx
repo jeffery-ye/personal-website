@@ -1,5 +1,5 @@
 import ProjectCard from '../components/ProjectCard';
-import { content } from '../data/content';
+import { content } from '../data/content.jsx';
 import GradientText from '../components/GradientText';
 
 const Projects = () => {

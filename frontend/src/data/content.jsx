@@ -63,7 +63,7 @@ const projectsData = [
 const publicationsData = [
   {
     id: 1,
-    title: "Automated extraction and optimization of protein purification protocols using multi-agent large language models",
+    title: "AI Agents for Protein Purification",
     authors: ["Jeffery Ye", "Amy DeRocher", "Monique Khim", "Sandhya Subramanian", "Lisabeth Cron", "Peter J. Myler", "Isabelle Q. Phan"],
     venue: "bioRxiv",
     year: 2026,
@@ -134,12 +134,24 @@ export const content = {
   about: {
     id: 'about',
     label: "About Me",
-    intro: "I'm a graduating senior at the University of Washington, specializing in Software and AI. Currently, I work as a Software Research Assistant at Seattle Children's, where I build autonomous AI agents to accelerate research workflows. I'm also a teaching assistant at the Information School, where I teach students about concepts like Large Language Models, AI Ethics, Machine Learning.",
+    intro: (
+      <>
+        AI Engineer at the U.S. Department of the Treasury, specializing in full-stack development. I'm a new grad of the University of Washington, where I built{' '}
+        <a
+          href="https://www.biorxiv.org/content/10.64898/2026.03.03.709341v1"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-nebula-cyan hover:underline transition-colors"
+        >
+          AI agents to accelerate genomics research
+        </a>
+        , and instructed students on basic LLMs, AI ethics, and data science.
+      </>
+    ),
 
     bio: [
-      "Hi, I'm Jeffery, a senior Informatics student at the University of Washington. I'm a software research assistant at Seattle Children's Research Institute, where I get to combine my passions for AI/NLP with fascinating (and terrifying) infectious diseases. I've created complex agentic workflows, worked on full-stack web applications, and written a research paper there. I'm also a teaching assistant for the Information School, where I help instruct students on the foundations of Informatics. We discuss concepts at the intersection between technology and society, and I've enjoyed teaching classes on topics like LLMs, algorithmic bias, cybersecurity, data science, etc.",
-      "Outside of work, I can often be found rock climbing (cliché, I know). I mostly focus on indoor bouldering, but have been known to climb outdoors. I'm also a big fan of sci-fi, no matter if its through books, movies, TV shows, or video games. I've always been fascinated by space, astronomy, speculative exobiology, and more—hence the star theming of this website.",
-      "Interested in working with me, chatting about my hobbies, or anything in between? Feel free to reach out through my LinkedIn or Email!"
+      "I'm Jeffery, a software/AI engineer and recent graduate of the University of Washington. I'm an AI engineer with the U.S. Department of the Treasury through the U.S Tech Force program. There, I build full-stack enterprise applications at scale and collaborate directly with cross-functional stakeholders coming from diverse fields and backgrounds. My previous experience includes being a software research assistant at Seattle Children's Hospital, where I combined my passions for AI/NLP with fascinating (and terrifying) infectious diseases. I was also a teaching assistant for the Information School for two years, where I helped instruct students at the intersection of tech and society, with deep dives into topics like LLMs, algorithmic bias, cybersecurity, and data science.",
+      "Outside of work, I can often be found rock climbing (cliché, I know). I mostly do indoor bouldering, but have been known to climb outdoors on occasion. I'm also a big fan of sci-fi, whether through books, movies, TV shows, or games. I've always been fascinated by space, astronomy, speculative exobiology, and more—hence the overly star themed website.",
     ],
     x: 300,
     y: -170,

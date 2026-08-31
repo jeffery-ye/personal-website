@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import { X } from 'lucide-react';
 import { useStore, useStoreActions } from '../../store/useStore';
 import ProjectCard from '../ProjectCard';
-import { content } from '../../data/content';
+import { content } from '../../data/content.jsx';
 
 const ActiveProjectOverlay = () => {
     const activeProjectId = useStore((state) => state.activeProjectId);
@@ -15,7 +15,7 @@ const ActiveProjectOverlay = () => {
         ? content[`project-${activeProjectId}`]
         : null;
 
-    // Close on Escape key
+    // Close on Escape key & Lock body scroll
     useEffect(() => {
         const handleKeyDown = (e) => {
             if (e.key === 'Escape') {
@@ -24,8 +24,12 @@ const ActiveProjectOverlay = () => {
         };
 
         if (activeProjectId) {
+            document.body.style.overflow = 'hidden';
             window.addEventListener('keydown', handleKeyDown);
-            return () => window.removeEventListener('keydown', handleKeyDown);
+            return () => {
+                document.body.style.overflow = '';
+                window.removeEventListener('keydown', handleKeyDown);
+            };
         }
     }, [activeProjectId, clearActiveProject]);
 
@@ -33,7 +37,7 @@ const ActiveProjectOverlay = () => {
         <AnimatePresence>
             {activeProject && (
                 <>
-                    {/* Backdrop - Removed blur for performance */}
+                    {/* Backdrop */}
                     <motion.div
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
@@ -44,6 +48,9 @@ const ActiveProjectOverlay = () => {
 
                     {/* Card Container - Zoom in animation */}
                     <motion.div
+                        role="dialog"
+                        aria-modal="true"
+                        aria-label="Project Details"
                         initial={{ opacity: 0, scale: 0.8, x: '-50%', y: '-50%' }}
                         animate={{ opacity: 1, scale: 1, x: '-50%', y: '-50%' }}
                         exit={{ opacity: 0, scale: 0.8, x: '-50%', y: '-50%' }}
@@ -53,8 +60,8 @@ const ActiveProjectOverlay = () => {
                         {/* Close Button */}
                         <button
                             onClick={clearActiveProject}
-                            className="absolute -top-12 right-0 p-2 text-star-400 hover:text-white transition-colors"
-                            aria-label="Close"
+                            className="absolute -top-12 right-0 p-2 text-star-400 hover:text-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-nebula-cyan rounded-md"
+                            aria-label="Close dialog"
                         >
                             <X size={24} />
                         </button>

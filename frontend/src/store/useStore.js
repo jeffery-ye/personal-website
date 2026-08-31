@@ -2,9 +2,8 @@ import { create } from 'zustand';
 
 export const useStore = create((set) => ({
     viewMode: 'galaxy', // 'list' | 'galaxy'
-    isMobile: false, // defined as width < 768px
+    isMobile: false, // defined as width < 1280px
     prefersReducedMotion: false, // defined by media query
-    camera: { x: 0, y: 0, zoom: 1 }, // intended for future use
 
     activeProjectId: null, // string | null — the ID of the currently expanded project
     activePublicationId: null, // string | null — the ID of the currently expanded publication
@@ -12,16 +11,39 @@ export const useStore = create((set) => ({
     orbitSystem: 'home', // 'home' | 'projects' | 'publications'
 
     actions: {
-        setActiveProject: (id) => set({ activeProjectId: id }),
+        setActiveProject: (id) => set({
+            activeProjectId: id,
+            activePublicationId: null,
+            activeSection: null,
+        }),
         clearActiveProject: () => set({ activeProjectId: null }),
 
-        setActivePublication: (id) => set({ activePublicationId: id }),
+        setActivePublication: (id) => set({
+            activePublicationId: id,
+            activeProjectId: null,
+            activeSection: null,
+        }),
         clearActivePublication: () => set({ activePublicationId: null }),
 
-        setActiveSection: (section) => set({ activeSection: section }),
+        setActiveSection: (section) => set({
+            activeSection: section,
+            activeProjectId: null,
+            activePublicationId: null,
+        }),
         clearActiveSection: () => set({ activeSection: null }),
 
-        setOrbitSystem: (system) => set({ orbitSystem: system }),
+        clearAllModals: () => set({
+            activeProjectId: null,
+            activePublicationId: null,
+            activeSection: null,
+        }),
+
+        setOrbitSystem: (system) => set({
+            orbitSystem: system,
+            activeProjectId: null,
+            activePublicationId: null,
+            activeSection: null,
+        }),
 
         toggleViewMode: () => set((state) => {
             if (state.isMobile || state.prefersReducedMotion) {
@@ -38,8 +60,6 @@ export const useStore = create((set) => ({
             }
             return updates;
         }),
-
-        setCamera: (camera) => set((state) => ({ camera: { ...state.camera, ...camera } })),
     },
 }));
 
